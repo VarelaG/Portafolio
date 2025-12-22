@@ -1,13 +1,13 @@
 import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
 import tailwindcss from '@tailwindcss/vite'
-import path from 'path'; // <--- Importa 'path'
-
+import path from 'path';
 
 // https://vite.dev/config/
 export default defineConfig({
-  plugins: [react(),    tailwindcss()],
-  resolve: { // <--- Añade esta sección
+  plugins: [react(), tailwindcss()],
+  base: '/Portafolio/', // <--- AGREGA ESTA LÍNEA VITAL
+  resolve: {
     alias: {
       "@": path.resolve(__dirname, "./src"),
     },
