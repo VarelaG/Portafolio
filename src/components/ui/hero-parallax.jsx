@@ -65,8 +65,8 @@ export const Header = () => {
         Proyectos
       </h1>
       <p className="max-w-2xl text-base md:text-xl mt-8 dark:text-neutral-200">
-        Una selección de mis trabajos más recientes. He desarrollado estas 
-        soluciones utilizando tecnologías modernas como React, Node.js y Tailwind CSS, 
+        Una selección de mis trabajos más recientes. He desarrollado estas
+        soluciones utilizando tecnologías modernas como React, Node.js y Tailwind CSS,
         enfocándome en la performance y la experiencia de usuario.
       </p>
     </div>
@@ -77,6 +77,22 @@ export const ProductCard = ({
   product,
   translate
 }) => {
+  const videoRef = React.useRef(null);
+
+  const handleMouseEnter = () => {
+    if (videoRef.current) {
+      videoRef.current.play();
+    }
+  };
+
+  const handleMouseLeave = () => {
+    if (videoRef.current) {
+      videoRef.current.pause();
+      // Optional: reset to start
+      // videoRef.current.currentTime = 0; 
+    }
+  };
+
   return (
     <motion.div
       style={{
@@ -86,14 +102,20 @@ export const ProductCard = ({
         y: -20,
       }}
       key={product.title}
-      className="group/product h-96 w-[30rem] relative shrink-0">
-      <a href={product.link} className="block group-hover/product:shadow-2xl ">
-        <img
+      className="group/product h-80 w-[36rem] relative shrink-0"
+      onMouseEnter={handleMouseEnter}
+      onMouseLeave={handleMouseLeave}
+    >
+      <a href={product.link} className="block group-hover/product:shadow-2xl h-full w-full">
+        <video
+          ref={videoRef}
           src={product.thumbnail}
-          height="600"
-          width="600"
           className="object-cover object-left-top absolute h-full w-full inset-0"
-          alt={product.title} />
+          muted
+          loop
+          playsInline
+          preload="metadata"
+        />
       </a>
       <div
         className="absolute inset-0 h-full w-full opacity-0 group-hover/product:opacity-80 bg-black pointer-events-none"></div>

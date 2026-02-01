@@ -1,106 +1,26 @@
-// src/components/ui/HeroParallaxDemo.jsx
-
 "use client";
 import React from "react";
 // Asegúrate de que este path sea correcto
-import { HeroParallax } from "@/components/ui/hero-parallax"; 
+import { HeroParallax } from "@/components/ui/hero-parallax";
+
+// Importar los videos
+// Importando directamente con los nombres de archivo proporcionados
+import Video1 from "../../assets/WhatsApp Video 2026-01-31 at 23.44.48.mp4";
+import Video2 from "../../assets/WhatsApp Video 2026-01-31 at 23.46.46.mp4";
+import Video3 from "../../assets/WhatsApp Video 2026-01-31 at 23.48.04.mp4";
+import Video4 from "../../assets/WhatsApp Video 2026-01-31 at 23.48.42.mp4";
+import Video5 from "../../assets/WhatsApp Video 2026-01-31 at 23.50.43.mp4";
+
+// Lista de videos
+const videos = [Video1, Video2, Video3, Video4, Video5];
 
 // Esta es la lista de datos que pasas al componente HeroParallax
-export const products = [
-  {
-    title: "Moonbeam",
-    link: "https://gomoonbeam.com",
-    thumbnail:
-      "https://aceternity.com/images/products/thumbnails/new/moonbeam.png",
-  },
-  {
-    title: "Cursor",
-    link: "https://cursor.so",
-    thumbnail:
-      "https://aceternity.com/images/products/thumbnails/new/cursor.png",
-  },
-  {
-    title: "Rogue",
-    link: "https://userogue.com",
-    thumbnail:
-      "https://aceternity.com/images/products/thumbnails/new/rogue.png",
-  },
- 
-  {
-    title: "Editorially",
-    link: "https://editorially.org",
-    thumbnail:
-      "https://aceternity.com/images/products/thumbnails/new/editorially.png",
-  },
-  {
-    title: "Editrix AI",
-    link: "https://editrix.ai",
-    thumbnail:
-      "https://aceternity.com/images/products/thumbnails/new/editrix.png",
-  },
-  {
-    title: "Pixel Perfect",
-    link: "https://app.pixelperfect.quest",
-    thumbnail:
-      "https://aceternity.com/images/products/thumbnails/new/pixelperfect.png",
-  },
- 
-  {
-    title: "Algochurn",
-    link: "https://algochurn.com",
-    thumbnail:
-      "https://aceternity.com/images/products/thumbnails/new/algochurn.png",
-  },
-  {
-    title: "Aceternity UI",
-    link: "https://ui.aceternity.com",
-    thumbnail:
-      "https://aceternity.com/images/products/thumbnails/new/aceternityui.png",
-  },
-  {
-    title: "Tailwind Master Kit",
-    link: "https://tailwindmasterkit.com",
-    thumbnail:
-      "https://aceternity.com/images/products/thumbnails/new/tailwindmasterkit.png",
-  },
-  {
-    title: "SmartBridge",
-    link: "https://smartbridgetech.com",
-    thumbnail:
-      "https://aceternity.com/images/products/thumbnails/new/smartbridge.png",
-  },
-  {
-    title: "Renderwork Studio",
-    link: "https://renderwork.studio",
-    thumbnail:
-      "https://aceternity.com/images/products/thumbnails/new/renderwork.png",
-  },
- 
-  {
-    title: "Creme Digital",
-    link: "https://cremedigital.com",
-    thumbnail:
-      "https://aceternity.com/images/products/thumbnails/new/cremedigital.png",
-  },
-  {
-    title: "Golden Bells Academy",
-    link: "https://goldenbellsacademy.com",
-    thumbnail:
-      "https://aceternity.com/images/products/thumbnails/new/goldenbellsacademy.png",
-  },
-  {
-    title: "Invoker Labs",
-    link: "https://invoker.lol",
-    thumbnail:
-      "https://aceternity.com/images/products/thumbnails/new/invoker.png",
-  },
-  {
-    title: "E Free Invoice",
-    link: "https://efreeinvoice.com",
-    thumbnail:
-      "https://aceternity.com/images/products/thumbnails/new/efreeinvoice.png",
-  },
-];
+// Generamos 15 items repitiendo los 5 videos
+export const products = Array.from({ length: 10 }).map((_, index) => ({
+  title: `Proyecto ${index + 1}`, // Placeholder title
+  link: `https://github.com/tu-usuario/proyecto-${index + 1}`, // Link a GitHub
+  thumbnail: videos[index % videos.length], // Cycle through videos
+}));
 
 // Este es el componente que usarás en tu página principal
 export function HeroParallaxDemo() {

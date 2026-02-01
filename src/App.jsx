@@ -3,25 +3,33 @@ import { HeroParallaxDemo } from './components/ui/HeroParallaxDemo'
 import { CardHoverEffectDemo } from './components/ui/CardHoverEffectDemo'
 import { SignupFormDemo } from './components/ui/SignupFormDemo'
 import ContactSection from './components/ui/ContactSection' // Importá el nuevo
+import { FloatingNav } from './components/ui/FloatingNav'
 
 function App() {
   return (
     <div className="bg-black text-white overflow-x-hidden w-full">
+      <FloatingNav />
       {/* 1. Introducción Personal */}
-      <HeroIntro />
-      
+      <div id="intro">
+        <HeroIntro />
+      </div>
+
       {/* 2. Proyectos (Parallax) */}
-      <HeroParallaxDemo />
-      
+      <div id="projects">
+        <HeroParallaxDemo />
+      </div>
+
       {/* 3. Habilidades (Cards) */}
-      <div className="py-20">
+      <div id="tech" className="py-20">
         <h2 className="text-center text-4xl font-bold mb-10">Tecnologías</h2>
         <CardHoverEffectDemo />
       </div>
-      
+
       {/* 4. Contacto */}
+      <div id="contact">
         <ContactSection />
-      
+      </div>
+
     </div>
   )
 }
