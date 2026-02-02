@@ -4,15 +4,16 @@ import { cn } from "@/lib/utils";
 
 export const FloatingNav = ({ className }) => {
     const { scrollY } = useScroll();
-    const [visible, setVisible] = useState(true);
+    const [visible, setVisible] = useState(false); // Cambiado a false para que inicie oculto
 
     useMotionValueEvent(scrollY, "change", (current) => {
         // Check if current is not undefined and is a number
         if (typeof current === "number") {
             let direction = current - scrollY.getPrevious();
 
-            if (scrollY.get() < 50) {
-                setVisible(true);
+            // En móvil, solo mostrar después de scroll de 100px
+            if (scrollY.get() < 100) {
+                setVisible(false);
             } else {
                 if (direction < 0) {
                     setVisible(true);

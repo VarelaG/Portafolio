@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ALMA | Espacio de Bienestar</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500&family=Spectral:ital,wght@0,300;0,400;0,600;1,300&display=swap"
+        rel="stylesheet">
+
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'alma-cream': '#F9F7F2',    // Fondo principal crema suave
+                        'alma-sage': '#8F9E8B',     // Verde Salvia
+                        'alma-terra': '#C68F7B',    // Terracota suave
+                        'alma-dark': '#4A4A4A',     // Gris oscuro suave para texto (no negro puro)
+                    },
+                    fontFamily: {
+                        sans: ['Montserrat', 'sans-serif'],
+                        serif: ['Spectral', 'serif'],
+                    },
+                    borderRadius: {
+                        '4xl': '2rem',
+                        '5xl': '3rem',
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        /* Clases utilitarias para el estilo orgánico */
+        .organic-blob {
+            border-radius: 40% 60% 70% 30% / 40% 50% 60% 50%;
+            animation: morph 8s ease-in-out infinite;
+        }
+
+        @keyframes morph {
+            0% {
+                border-radius: 40% 60% 70% 30% / 40% 50% 60% 50%;
+            }
+
+            50% {
+                border-radius: 30% 60% 70% 40% / 50% 60% 30% 60%;
+            }
+
+            100% {
+                border-radius: 40% 60% 70% 30% / 40% 50% 60% 50%;
+            }
+        }
+
+        /* Scroll suave */
+        html {
+            scroll-behavior: smooth;
+        }
+    </style>
+</head>
+
+<body class="bg-alma-cream text-alma-dark selection:bg-alma-sage selection:text-white overflow-x-hidden">
+
+    <nav class="py-6 px-8 flex justify-between items-center max-w-7xl mx-auto">
+        <div class="font-serif text-3xl tracking-widest text-alma-terra">ALMA</div>
+
+        <div class="hidden md:flex space-x-12 font-medium text-sm tracking-wider uppercase">
+            <a href="#inicio" class="hover:text-alma-terra transition-colors">Inicio</a>
+            <a href="#clases" class="hover:text-alma-terra transition-colors">Prácticas</a>
+            <a href="#nosotros" class="hover:text-alma-terra transition-colors">El Espacio</a>
+            <a href="#contacto" class="hover:text-alma-terra transition-colors">Contacto</a>
+        </div>
+
+        <button
+            class="bg-alma-sage text-white px-6 py-3 rounded-full hover:bg-alma-terra transition-all duration-500 shadow-md hover:shadow-lg text-sm tracking-wider">
+            Reservar Clase
+        </button>
+    </nav>
+
+    <header id="inicio" class="relative min-h-[90vh] flex items-center py-20 px-4 overflow-hidden">
+        <div
+            class="absolute top-0 right-0 w-[600px] h-[600px] bg-alma-sage/20 organic-blob blur-3xl -z-10 translate-x-1/3 -translate-y-1/3">
+        </div>
+        <div
+            class="absolute bottom-0 left-0 w-[500px] h-[500px] bg-alma-terra/20 organic-blob blur-3xl -z-10 -translate-x-1/4 translate-y-1/4 animate-reverse">
+        </div>
+
+        <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-16 items-center">
+            <div class="space-y-8 relative z-10">
+                <span class="text-alma-sage tracking-[0.2em] uppercase text-sm font-medium">Vuelve a tu centro</span>
+                <h1 class="font-serif text-6xl md:text-7xl leading-tight font-light">
+                    Conecta cuerpo, <br>
+                    <span class="text-alma-terra italic">mente y espíritu.</span>
+                </h1>
+                <p class="text-lg font-light leading-relaxed max-w-md text-alma-dark/80">
+                    Un refugio urbano diseñado para que encuentres la pausa que necesitas. Yoga, meditación y bienestar
+                    holístico en un entorno natural.
+                </p>
+                <div class="flex items-center space-x-6 pt-4">
+                    <button
+                        class="bg-alma-dark text-white px-8 py-4 rounded-full hover:bg-alma-terra transition-colors duration-300 shadow-lg tracking-wider text-sm">
+                        Comenzar Viaje
+                    </button>
+                    <a href="#" class="flex items-center gap-2 group text-alma-dark hover:text-alma-terra transition">
+                        <span class="border-b border-current pb-1">Ver Horarios</span>
+                        <i data-lucide="arrow-right" class="w-4 h-4 group-hover:translate-x-1 transition-transform"></i>
+                    </a>
+                </div>
+            </div>
+
+            <div class="relative">
+                <img src="https://images.unsplash.com/photo-1545205597-3d9d02c29597?q=80&w=2070&auto=format&fit=crop"
+                    alt="Mujer haciendo yoga"
+                    class="w-full h-[600px] object-cover rounded-[3rem] shadow-2xl relative z-10">
+
+                <img src="https://images.unsplash.com/photo-1528319725582-ddc096101511?q=80&w=2070&auto=format&fit=crop"
+                    class="hidden md:block absolute -bottom-12 -left-12 w-64 h-64 object-cover rounded-4xl shadow-xl z-20 border-8 border-alma-cream">
+            </div>
+        </div>
+    </header>
+
+    <section id="nosotros" class="py-32 relative">
+        <div class="max-w-7xl mx-auto px-4 grid grid-cols-1 lg:grid-cols-3 gap-16 items-center">
+            <div class="lg:col-span-1 space-y-6">
+                <h2 class="font-serif text-4xl">Nuestra Filosofía</h2>
+                <p class="font-light leading-relaxed text-alma-dark/80">
+                    Creemos que el bienestar no es un destino, sino una práctica diaria. En ALMA, fusionamos técnicas
+                    ancestrales con un enfoque moderno y accesible para todos los niveles.
+                </p>
+                <div class="flex gap-8 pt-8">
+                    <div>
+                        <h4 class="font-serif text-4xl text-alma-sage mb-2">500+</h4>
+                        <p class="text-sm uppercase tracking-wider">Alumnos Felices</p>
+                    </div>
+                    <div>
+                        <h4 class="font-serif text-4xl text-alma-terra mb-2">25</h4>
+                        <p class="text-sm uppercase tracking-wider">Guías Expertos</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="lg:col-span-2 grid grid-cols-1 md:grid-cols-2 gap-8">
+                <div class="bg-white p-10 rounded-4xl shadow-sm hover:shadow-xl transition-all duration-500 group">
+                    <div
+                        class="bg-alma-sage/20 w-16 h-16 rounded-full flex items-center justify-center mb-8 group-hover:bg-alma-sage transition-colors">
+                        <i data-lucide="leaf"
+                            class="w-8 h-8 text-alma-sage group-hover:text-white transition-colors"></i>
+                    </div>
+                    <h3 class="font-serif text-2xl mb-4">Espacio Sostenible</h3>
+                    <p class="font-light text-sm leading-relaxed">Diseñado con materiales naturales, luz abundante y
+                        purificadores de aire biológicos.</p>
+                </div>
+
+                <div
+                    class="bg-white p-10 rounded-4xl shadow-sm hover:shadow-xl transition-all duration-500 group md:translate-y-12">
+                    <div
+                        class="bg-alma-terra/20 w-16 h-16 rounded-full flex items-center justify-center mb-8 group-hover:bg-alma-terra transition-colors">
+                        <i data-lucide="heart-handshake"
+                            class="w-8 h-8 text-alma-terra group-hover:text-white transition-colors"></i>
+                    </div>
+                    <h3 class="font-serif text-2xl mb-4">Comunidad Consciente</h3>
+                    <p class="font-light text-sm leading-relaxed">Más que un estudio, somos un grupo de personas
+                        buscando crecer juntos.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="clases" class="py-32 bg-white/50">
+        <div class="max-w-7xl mx-auto px-4 text-center mb-20">
+            <span class="text-alma-sage tracking-[0.2em] uppercase text-sm font-medium">Encuentra tu flujo</span>
+            <h2 class="font-serif text-5xl mt-4">Nuestras Prácticas</h2>
+        </div>
+
+        <div class="max-w-7xl mx-auto px-4 grid grid-cols-1 md:grid-cols-3 gap-8">
+            <div class="group cursor-pointer">
+                <div class="relative overflow-hidden rounded-t-4xl h-80">
+                    <img src="https://images.unsplash.com/photo-1599901860904-17e6ed7083a0?q=80&w=2069&auto=format&fit=crop"
+                        class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                        alt="Vinyasa Flow">
+                    <div
+                        class="absolute top-4 right-4 bg-white/90 px-4 py-1 rounded-full text-xs tracking-wider font-medium">
+                        INTENSIDAD MEDIA</div>
+                </div>
+                <div
+                    class="bg-white p-8 rounded-b-4xl shadow-sm group-hover:shadow-lg transition-all relative z-10 -mt-10 mx-4">
+                    <h3 class="font-serif text-2xl mb-2">Vinyasa Flow</h3>
+                    <p class="font-light text-sm mb-6 text-alma-dark/70">Secuencias dinámicas que sincronizan movimiento
+                        y respiración para energizar el cuerpo.</p>
+                    <a href="#"
+                        class="text-alma-terra flex items-center gap-2 text-sm group-hover:gap-4 transition-all">
+                        Ver detalles <i data-lucide="arrow-right" class="w-4 h-4"></i>
+                    </a>
+                </div>
+            </div>
+
+            <div class="group cursor-pointer md:-translate-y-8">
+                <div class="relative overflow-hidden rounded-t-4xl h-80">
+                    <img src="https://images.unsplash.com/photo-1506126613408-eca07ce68773?q=80&w=1999&auto=format&fit=crop"
+                        class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                        alt="Yin Yoga">
+                    <div
+                        class="absolute top-4 right-4 bg-white/90 px-4 py-1 rounded-full text-xs tracking-wider font-medium">
+                        RELAJANTE</div>
+                </div>
+                <div
+                    class="bg-white p-8 rounded-b-4xl shadow-sm group-hover:shadow-lg transition-all relative z-10 -mt-10 mx-4">
+                    <h3 class="font-serif text-2xl mb-2">Yin & Restaurativo</h3>
+                    <p class="font-light text-sm mb-6 text-alma-dark/70">Posturas pasivas sostenidas en el tiempo para
+                        una relajación profunda del tejido conectivo.</p>
+                    <a href="#"
+                        class="text-alma-terra flex items-center gap-2 text-sm group-hover:gap-4 transition-all">
+                        Ver detalles <i data-lucide="arrow-right" class="w-4 h-4"></i>
+                    </a>
+                </div>
+            </div>
+
+            <div class="group cursor-pointer">
+                <div class="relative overflow-hidden rounded-t-4xl h-80">
+                    <img src="https://images.unsplash.com/photo-1508672019048-805c876b67e2?q=80&w=1993&auto=format&fit=crop"
+                        class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                        alt="Meditacion">
+                    <div
+                        class="absolute top-4 right-4 bg-white/90 px-4 py-1 rounded-full text-xs tracking-wider font-medium">
+                        PARA TODOS</div>
+                </div>
+                <div
+                    class="bg-white p-8 rounded-b-4xl shadow-sm group-hover:shadow-lg transition-all relative z-10 -mt-10 mx-4">
+                    <h3 class="font-serif text-2xl mb-2">Mindfulness & Sound</h3>
+                    <p class="font-light text-sm mb-6 text-alma-dark/70">Técnicas de atención plena acompañadas de baños
+                        de sonido con cuencos tibetanos.</p>
+                    <a href="#"
+                        class="text-alma-terra flex items-center gap-2 text-sm group-hover:gap-4 transition-all">
+                        Ver detalles <i data-lucide="arrow-right" class="w-4 h-4"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="py-32 bg-alma-sage/10 relative overflow-hidden">
+        <div class="max-w-4xl mx-auto px-4 text-center relative z-10">
+            <i data-lucide="quote" class="w-12 h-12 text-alma-sage mx-auto mb-8 opacity-50"></i>
+            <p class="font-serif text-3xl md:text-4xl italic leading-relaxed text-alma-dark mb-12">
+                "ALMA ha transformado mi relación con el estrés. Es el único lugar de la ciudad donde realmente siento
+                que el tiempo se detiene y puedo volver a mí."
+            </p>
+            <div class="flex items-center justify-center gap-4">
+                <img src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?q=80&w=2070&auto=format&fit=crop"
+                    class="w-16 h-16 rounded-full object-cover shadow-md border-2 border-white" alt="Testimonio">
+                <div class="text-left">
+                    <h4 class="font-medium">Sofia M.</h4>
+                    <p class="text-sm font-light">Miembro desde 2023</p>
+                </div>
+            </div>
+        </div>
+        <div
+            class="absolute bottom-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-alma-sage/30 to-transparent">
+        </div>
+    </section>
+
+    <footer id="contacto" class="py-20 bg-alma-dark text-alma-cream">
+        <div class="max-w-7xl mx-auto px-8 grid grid-cols-1 md:grid-cols-4 gap-12">
+            <div class="md:col-span-2 space-y-6">
+                <div class="font-serif text-3xl tracking-widest text-alma-terra">ALMA</div>
+                <p class="font-light max-w-xs opacity-80">Tu santuario urbano para el bienestar integral. Abierto todos
+                    los días.</p>
+                <div class="flex space-x-4 pt-4">
+                    <a href="#" class="hover:text-alma-terra transition"><i data-lucide="instagram"
+                            class="w-6 h-6"></i></a>
+                    <a href="#" class="hover:text-alma-terra transition"><i data-lucide="facebook"
+                            class="w-6 h-6"></i></a>
+                    <a href="#" class="hover:text-alma-terra transition"><i data-lucide="mail" class="w-6 h-6"></i></a>
+                </div>
+            </div>
+
+            <div>
+                <h4 class="font-medium uppercase tracking-wider mb-6">Visítanos</h4>
+                <ul class="space-y-4 font-light opacity-80">
+                    <li class="flex gap-3"><i data-lucide="map-pin" class="w-5 h-5 text-alma-terra"></i> Calle del Sol
+                        123, Palermo</li>
+                    <li class="flex gap-3"><i data-lucide="clock" class="w-5 h-5 text-alma-terra"></i> Lun-Vie: 7am -
+                        9pm</li>
+                    <li class="flex gap-3 ml-8">Sáb-Dom: 9am - 1pm</li>
+                </ul>
+            </div>
+
+            <div>
+                <h4 class="font-medium uppercase tracking-wider mb-6">Newsletter</h4>
+                <p class="font-light text-sm mb-4 opacity-80">Recibe inspiración y horarios mensuales.</p>
+                <div class="flex">
+                    <input type="email" placeholder="Tu correo..."
+                        class="bg-white/10 rounded-l-full px-6 py-3 focus:outline-none focus:bg-white/20 w-full font-light placeholder-alma-cream/50">
+                    <button
+                        class="bg-alma-terra hover:bg-alma-sage transition-colors rounded-r-full px-6 flex items-center justify-center">
+                        <i data-lucide="arrow-right" class="w-5 h-5"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <div
+            class="max-w-7xl mx-auto px-8 pt-16 mt-16 border-t border-white/10 text-center font-light text-sm opacity-60">
+            © 2026 ALMA Estudio de Bienestar. Hecho con intención.
+        </div>
+    </footer>
+
+    <script>
+        lucide.createIcons();
+    </script>
+</body>
+
+</html>

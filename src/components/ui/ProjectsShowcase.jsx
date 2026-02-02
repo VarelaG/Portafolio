@@ -20,7 +20,7 @@ export function ProjectsShowcase() {
             category: "GASTRONOMÍA PREMIUM",
             description: "Landing page 'Dark Luxury' con sistema de reservas integrado, galería inmersiva y experiencia gastronómica premium.",
             image: parrillaImg,
-            htmlPath: "/src/proyectos/parrilla_premium.html",
+            htmlPath: "/proyectos/parrilla_premium.html",
             tags: ["Next.js", "Tailwind", "Framer Motion"],
             size: "large"
         },
@@ -31,7 +31,7 @@ export function ProjectsShowcase() {
             category: "E-COMMERCE",
             description: "Estilo Brutalista & Urbano con carrito de compras dinámico y experiencia de usuario moderna.",
             image: ropaImg,
-            htmlPath: "/src/proyectos/ropa_urbano.html",
+            htmlPath: "/proyectos/ropa_urbano.html",
             tags: ["React", "Tailwind", "GSAP"],
             size: "small"
         },
@@ -42,7 +42,7 @@ export function ProjectsShowcase() {
             category: "BIENESTAR",
             description: "Diseño orgánico minimalista con sistema de reservas de clases y galería de instructores.",
             image: yogaImg,
-            htmlPath: "/src/proyectos/yoga_alma.html",
+            htmlPath: "/proyectos/yoga_alma.html",
             tags: ["Next.js", "Framer Motion", "Tailwind"],
             size: "small"
         },
@@ -53,7 +53,7 @@ export function ProjectsShowcase() {
             category: "ARQUITECTURA MODERNA",
             description: "Estética 'Dark Tech' futurista para estudio de arquitectura con galería 3D interactiva de proyectos.",
             image: arquitecturaImg,
-            htmlPath: "/src/proyectos/arquitectura_vantage.html",
+            htmlPath: "/proyectos/arquitectura_vantage.html",
             tags: ["React", "Three.js", "GSAP"],
             size: "large"
         }
@@ -281,7 +281,7 @@ function ProjectCard({ project, delay, className, onClick, onHover }) {
                         {project.category}
                     </span>
                     {isLarge && (
-                        <div className="w-12 h-12 rounded-full bg-white/10 backdrop-blur-md border border-white/20 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-300 transform group-hover:rotate-45">
+                        <div className="hidden md:flex w-12 h-12 rounded-full bg-white/10 backdrop-blur-md border border-white/20 items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-300 transform group-hover:rotate-45">
                             <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none" viewBox="0 0 24 24" stroke="white" strokeWidth="2">
                                 <path strokeLinecap="round" strokeLinejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" />
                             </svg>
@@ -289,29 +289,41 @@ function ProjectCard({ project, delay, className, onClick, onHover }) {
                     )}
                 </div>
 
-                {/* Info inferior */}
+                {/* Espaciador para empujar el contenido hacia abajo en móvil */}
+                <div className="flex-1 md:flex-none"></div>
+
+                {/* Info inferior - Más abajo en móvil */}
                 <div className="transform transition-all duration-500 group-hover:-translate-y-2">
                     <h3 className={`${isLarge ? 'text-4xl md:text-5xl' : 'text-3xl'} font-bold text-white mb-3 tracking-tight`}>
                         {project.title} <span className="text-neutral-400">|</span> {project.subtitle}
                     </h3>
-                    <p className={`text-neutral-300 ${isLarge ? 'text-base' : 'text-sm'} mb-4 max-w-lg opacity-0 group-hover:opacity-100 transition-all duration-500 transform translate-y-4 group-hover:translate-y-0`}>
+                    <p className={`text-neutral-300 ${isLarge ? 'text-base' : 'text-sm'} mb-4 max-w-lg opacity-0 md:group-hover:opacity-100 transition-all duration-500 transform translate-y-4 group-hover:translate-y-0 hidden md:block`}>
                         {project.description}
                     </p>
-                    <div className="flex gap-2 opacity-0 group-hover:opacity-100 transition-all duration-500 delay-100 flex-wrap">
+                    <div className="flex gap-2 opacity-0 md:group-hover:opacity-100 transition-all duration-500 delay-100 flex-wrap hidden md:flex">
                         {project.tags.map((tag, index) => (
                             <span key={index} className="px-3 py-1 rounded-full bg-white/10 backdrop-blur-sm text-white text-xs">
                                 {tag}
                             </span>
                         ))}
                     </div>
+
+                    {/* Botón "Ver Demo" visible en móvil */}
+                    <button className="mt-4 md:hidden px-6 py-3 rounded-full bg-white/20 backdrop-blur-md border border-white/30 text-white text-sm font-bold flex items-center gap-2 hover:bg-white/30 transition-all">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">
+                            <path strokeLinecap="round" strokeLinejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                            <path strokeLinecap="round" strokeLinejoin="round" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
+                        </svg>
+                        Ver Demo
+                    </button>
                 </div>
             </div>
 
             {/* Borde con gradiente */}
             <div className="absolute inset-0 rounded-3xl border-2 border-transparent group-hover:border-white/30 transition-all duration-500"></div>
 
-            {/* Indicador de "Click para ver más" */}
-            <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 opacity-0 group-hover:opacity-100 transition-all duration-300 pointer-events-none">
+            {/* Indicador de "Click para ver más" - Solo desktop */}
+            <div className="hidden md:block absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 opacity-0 group-hover:opacity-100 transition-all duration-300 pointer-events-none">
                 <div className="px-6 py-3 rounded-full bg-white/20 backdrop-blur-md border border-white/30 text-white text-sm font-bold">
                     Click para ver completo
                 </div>
