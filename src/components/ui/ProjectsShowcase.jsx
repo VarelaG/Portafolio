@@ -10,6 +10,7 @@ import arquitecturaImg from '../../assets/arquitectura_vantage.png';
 export function ProjectsShowcase() {
     const [selectedProject, setSelectedProject] = useState(null);
     const [hoveredProject, setHoveredProject] = useState(null);
+    const [isIframeLoading, setIsIframeLoading] = useState(true);
 
     const projects = [
         {
@@ -19,6 +20,7 @@ export function ProjectsShowcase() {
             category: "GASTRONOMÍA PREMIUM",
             description: "Landing page 'Dark Luxury' con sistema de reservas integrado, galería inmersiva y experiencia gastronómica premium.",
             image: parrillaImg,
+            htmlPath: "/src/proyectos/parrilla_premium.html",
             tags: ["Next.js", "Tailwind", "Framer Motion"],
             size: "large"
         },
@@ -29,6 +31,7 @@ export function ProjectsShowcase() {
             category: "E-COMMERCE",
             description: "Estilo Brutalista & Urbano con carrito de compras dinámico y experiencia de usuario moderna.",
             image: ropaImg,
+            htmlPath: "/src/proyectos/ropa_urbano.html",
             tags: ["React", "Tailwind", "GSAP"],
             size: "small"
         },
@@ -39,6 +42,7 @@ export function ProjectsShowcase() {
             category: "BIENESTAR",
             description: "Diseño orgánico minimalista con sistema de reservas de clases y galería de instructores.",
             image: yogaImg,
+            htmlPath: "/src/proyectos/yoga_alma.html",
             tags: ["Next.js", "Framer Motion", "Tailwind"],
             size: "small"
         },
@@ -49,12 +53,14 @@ export function ProjectsShowcase() {
             category: "ARQUITECTURA MODERNA",
             description: "Estética 'Dark Tech' futurista para estudio de arquitectura con galería 3D interactiva de proyectos.",
             image: arquitecturaImg,
+            htmlPath: "/src/proyectos/arquitectura_vantage.html",
             tags: ["React", "Three.js", "GSAP"],
             size: "large"
         }
     ];
 
     const handleProjectClick = (project) => {
+        setIsIframeLoading(true);
         setSelectedProject(project);
     };
 
@@ -157,7 +163,7 @@ export function ProjectsShowcase() {
 
             </div>
 
-            {/* Modal para imagen completa */}
+            {/* Modal para proyecto completo */}
             <AnimatePresence>
                 {selectedProject && (
                     <motion.div
@@ -172,7 +178,7 @@ export function ProjectsShowcase() {
                             animate={{ scale: 1, opacity: 1 }}
                             exit={{ scale: 0.8, opacity: 0 }}
                             transition={{ type: "spring", damping: 25, stiffness: 300 }}
-                            className="relative max-w-7xl w-full max-h-[90vh] overflow-auto rounded-2xl"
+                            className="relative w-full h-full max-w-[95vw] max-h-[95vh] rounded-2xl overflow-hidden"
                             onClick={(e) => e.stopPropagation()}
                         >
                             {/* Botón cerrar */}
@@ -185,32 +191,51 @@ export function ProjectsShowcase() {
                                 </svg>
                             </button>
 
-                            {/* Imagen completa */}
-                            <img
-                                src={selectedProject.image}
-                                alt={selectedProject.title}
-                                className="w-full h-auto rounded-2xl shadow-2xl"
-                            />
+                            {/* Loader mientras carga el iframe */}
+                            {isIframeLoading && (
+                                <motion.div
+                                    initial={{ opacity: 0 }}
+                                    animate={{ opacity: 1 }}
+                                    exit={{ opacity: 0 }}
+                                    className="absolute inset-0 flex flex-col items-center justify-center bg-neutral-900 z-20"
+                                >
+                                    <div className="text-center">
+                                        {/* Spinner */}
+                                        <div className="w-16 h-16 border-4 border-white/10 border-t-white rounded-full animate-spin mb-6"></div>
 
-                            {/* Info del proyecto */}
-                            <div className="absolute bottom-0 left-0 right-0 p-8 bg-gradient-to-t from-black via-black/80 to-transparent rounded-b-2xl">
-                                <span className="px-4 py-2 rounded-full bg-white/10 backdrop-blur-md border border-white/20 text-neutral-300 text-xs font-bold tracking-wider inline-block mb-4">
-                                    {selectedProject.category}
-                                </span>
-                                <h3 className="text-4xl md:text-5xl font-bold text-white mb-2">
-                                    {selectedProject.title} <span className="text-neutral-400">|</span> {selectedProject.subtitle}
-                                </h3>
-                                <p className="text-neutral-300 text-lg mb-4 max-w-3xl">
-                                    {selectedProject.description}
-                                </p>
-                                <div className="flex gap-2 flex-wrap">
-                                    {selectedProject.tags.map((tag, index) => (
-                                        <span key={index} className="px-3 py-1 rounded-full bg-white/10 backdrop-blur-sm text-white text-xs">
-                                            {tag}
-                                        </span>
-                                    ))}
-                                </div>
-                            </div>
+                                        {/* Texto */}
+                                        <h3 className="text-white text-xl font-bold mb-2">
+                                            Cargando {selectedProject.title}
+                                        </h3>
+                                        <p className="text-neutral-400 text-sm mb-6">
+                                            {selectedProject.subtitle}
+                                        </p>
+
+                                        {/* Barra de progreso animada */}
+                                        <div className="w-64 h-1 bg-white/10 rounded-full overflow-hidden">
+                                            <motion.div
+                                                className="h-full bg-gradient-to-r from-white/50 via-white to-white/50"
+                                                initial={{ x: "-100%" }}
+                                                animate={{ x: "100%" }}
+                                                transition={{
+                                                    repeat: Infinity,
+                                                    duration: 1.5,
+                                                    ease: "easeInOut"
+                                                }}
+                                            />
+                                        </div>
+                                    </div>
+                                </motion.div>
+                            )}
+
+                            {/* Iframe con el proyecto HTML */}
+                            <iframe
+                                src={selectedProject.htmlPath}
+                                title={`${selectedProject.title} - ${selectedProject.subtitle}`}
+                                className="w-full h-full border-0 rounded-2xl"
+                                sandbox="allow-scripts allow-same-origin allow-forms allow-popups"
+                                onLoad={() => setIsIframeLoading(false)}
+                            />
                         </motion.div>
                     </motion.div>
                 )}

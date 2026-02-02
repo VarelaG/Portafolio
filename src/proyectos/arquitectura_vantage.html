@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VANTAGE | Arquitectura & Real Estate</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@200;300;400;500;700;800&display=swap"
+        rel="stylesheet">
+
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'vantage-black': '#1a1a1a',
+                        'vantage-gray': '#f4f4f4',
+                        'vantage-accent': '#3b82f6', // Un azul técnico muy sutil si hace falta
+                    },
+                    fontFamily: {
+                        sans: ['Manrope', 'sans-serif'],
+                    },
+                    letterSpacing: {
+                        'tightest': '-0.05em',
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        /* Líneas de grilla sutiles para el fondo */
+        .bg-grid {
+            background-size: 40px 40px;
+            background-image: linear-gradient(to right, #e5e7eb 1px, transparent 1px),
+                linear-gradient(to bottom, #e5e7eb 1px, transparent 1px);
+        }
+
+        /* Efecto de revelado de imagen */
+        .reveal-img {
+            clip-path: inset(0 0 0 0);
+            transition: clip-path 1s cubic-bezier(0.77, 0, 0.175, 1);
+        }
+
+        .hover-reveal:hover .reveal-overlay {
+            opacity: 1;
+        }
+    </style>
+</head>
+
+<body class="bg-white text-vantage-black antialiased selection:bg-black selection:text-white">
+
+    <nav class="fixed w-full z-50 bg-white/90 backdrop-blur-sm border-b border-gray-200">
+        <div class="max-w-[1800px] mx-auto px-6 h-20 flex justify-between items-center">
+            <div class="flex items-center gap-4">
+                <div class="w-8 h-8 bg-black text-white flex items-center justify-center font-bold text-xs">V.</div>
+                <span class="font-bold tracking-tight text-xl">VANTAGE</span>
+            </div>
+
+            <div class="hidden md:flex space-x-12 text-sm font-medium tracking-wide">
+                <a href="#" class="hover:text-gray-500 transition-colors">PROYECTOS</a>
+                <a href="#" class="hover:text-gray-500 transition-colors">ESTUDIO</a>
+                <a href="#" class="hover:text-gray-500 transition-colors">SERVICIOS</a>
+                <a href="#" class="hover:text-gray-500 transition-colors">NOTICIAS</a>
+            </div>
+
+            <button
+                class="border border-black px-6 py-2 text-xs font-bold uppercase tracking-widest hover:bg-black hover:text-white transition-all">
+                Contacto
+            </button>
+        </div>
+    </nav>
+
+    <header class="relative pt-32 pb-20 px-6 max-w-[1800px] mx-auto min-h-screen flex flex-col justify-center">
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-end mb-16">
+            <div class="lg:col-span-8">
+                <h1 class="text-6xl md:text-8xl lg:text-9xl font-light tracking-tightest leading-[0.9]">
+                    DISEÑO <br>
+                    <span class="font-bold">ATEMPORAL.</span>
+                </h1>
+            </div>
+            <div class="lg:col-span-4 border-l border-gray-200 pl-8 pb-2">
+                <p class="text-gray-500 text-lg leading-relaxed">
+                    Fusionamos arquitectura minimalista con funcionalidad moderna. Creamos espacios que no solo se
+                    habitan, se sienten.
+                </p>
+            </div>
+        </div>
+
+        <div class="relative w-full h-[60vh] overflow-hidden group">
+            <img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?q=80&w=2070&auto=format&fit=crop"
+                alt="Arquitectura Moderna"
+                class="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-1000 transform group-hover:scale-105">
+
+            <div class="absolute bottom-0 left-0 bg-white p-6 border-t border-r border-gray-200">
+                <p class="text-xs font-bold uppercase tracking-widest text-gray-400 mb-1">Proyecto Destacado</p>
+                <p class="text-xl font-bold">Residencia K42 — Palermo</p>
+            </div>
+        </div>
+    </header>
+
+    <section class="border-y border-gray-200">
+        <div class="grid grid-cols-2 md:grid-cols-4 divide-x divide-gray-200">
+            <div class="p-12 text-center group hover:bg-vantage-gray transition-colors">
+                <span
+                    class="block text-4xl md:text-5xl font-bold mb-2 group-hover:translate-y-[-5px] transition-transform">150+</span>
+                <span class="text-xs uppercase tracking-widest text-gray-500">Proyectos</span>
+            </div>
+            <div class="p-12 text-center group hover:bg-vantage-gray transition-colors">
+                <span
+                    class="block text-4xl md:text-5xl font-bold mb-2 group-hover:translate-y-[-5px] transition-transform">12</span>
+                <span class="text-xs uppercase tracking-widest text-gray-500">Premios Int.</span>
+            </div>
+            <div class="p-12 text-center group hover:bg-vantage-gray transition-colors">
+                <span
+                    class="block text-4xl md:text-5xl font-bold mb-2 group-hover:translate-y-[-5px] transition-transform">24</span>
+                <span class="text-xs uppercase tracking-widest text-gray-500">Años Exp.</span>
+            </div>
+            <div class="p-12 text-center group hover:bg-vantage-gray transition-colors">
+                <span
+                    class="block text-4xl md:text-5xl font-bold mb-2 group-hover:translate-y-[-5px] transition-transform">100%</span>
+                <span class="text-xs uppercase tracking-widest text-gray-500">Sostenible</span>
+            </div>
+        </div>
+    </section>
+
+    <section class="py-24 px-6 max-w-[1800px] mx-auto">
+        <div class="flex justify-between items-end mb-16">
+            <h2 class="text-4xl font-light">Proyectos <span class="font-bold">Seleccionados</span></h2>
+            <a href="#"
+                class="hidden md:flex items-center gap-2 text-sm font-bold uppercase tracking-widest border-b border-black pb-1 hover:text-gray-500 hover:border-gray-500 transition-colors">
+                Ver Portfolio Completo <i class="ph ph-arrow-right"></i>
+            </a>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-20">
+            <div class="group cursor-pointer">
+                <div class="overflow-hidden mb-6 relative">
+                    <img src="https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?q=80&w=2053&auto=format&fit=crop"
+                        class="w-full h-[600px] object-cover transition-transform duration-700 group-hover:scale-105"
+                        alt="Casa Minimalista">
+                    <div class="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-colors"></div>
+                </div>
+                <div class="flex justify-between items-start border-t border-gray-200 pt-6">
+                    <div>
+                        <h3 class="text-2xl font-bold mb-1">Casa del Lago</h3>
+                        <p class="text-gray-500 text-sm">Residencial — Nordelta</p>
+                    </div>
+                    <span class="text-2xl font-light text-gray-300 group-hover:text-black transition-colors">01</span>
+                </div>
+            </div>
+
+            <div class="group cursor-pointer md:mt-24">
+                <div class="overflow-hidden mb-6 relative">
+                    <img src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?q=80&w=2070&auto=format&fit=crop"
+                        class="w-full h-[600px] object-cover transition-transform duration-700 group-hover:scale-105"
+                        alt="Edificio Corporativo">
+                    <div class="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-colors"></div>
+                </div>
+                <div class="flex justify-between items-start border-t border-gray-200 pt-6">
+                    <div>
+                        <h3 class="text-2xl font-bold mb-1">Torre Alvear</h3>
+                        <p class="text-gray-500 text-sm">Comercial — Puerto Madero</p>
+                    </div>
+                    <span class="text-2xl font-light text-gray-300 group-hover:text-black transition-colors">02</span>
+                </div>
+            </div>
+
+            <div class="group cursor-pointer">
+                <div class="overflow-hidden mb-6 relative">
+                    <img src="https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?q=80&w=1974&auto=format&fit=crop"
+                        class="w-full h-[600px] object-cover transition-transform duration-700 group-hover:scale-105"
+                        alt="Interior Minimalista">
+                    <div class="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-colors"></div>
+                </div>
+                <div class="flex justify-between items-start border-t border-gray-200 pt-6">
+                    <div>
+                        <h3 class="text-2xl font-bold mb-1">Loft Industrial</h3>
+                        <p class="text-gray-500 text-sm">Interiorismo — San Telmo</p>
+                    </div>
+                    <span class="text-2xl font-light text-gray-300 group-hover:text-black transition-colors">03</span>
+                </div>
+            </div>
+
+            <div class="group cursor-pointer md:mt-24">
+                <div class="overflow-hidden mb-6 relative">
+                    <img src="https://images.unsplash.com/photo-1497366216548-37526070297c?q=80&w=2069&auto=format&fit=crop"
+                        class="w-full h-[600px] object-cover transition-transform duration-700 group-hover:scale-105"
+                        alt="Espacio de Trabajo">
+                    <div class="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-colors"></div>
+                </div>
+                <div class="flex justify-between items-start border-t border-gray-200 pt-6">
+                    <div>
+                        <h3 class="text-2xl font-bold mb-1">Estudio Creativo</h3>
+                        <p class="text-gray-500 text-sm">Corporativo — Palermo Soho</p>
+                    </div>
+                    <span class="text-2xl font-light text-gray-300 group-hover:text-black transition-colors">04</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="bg-vantage-black text-white py-24 px-6">
+        <div class="max-w-[1800px] mx-auto grid grid-cols-1 lg:grid-cols-12 gap-16">
+            <div class="lg:col-span-4">
+                <h2 class="text-4xl font-light mb-8">Nuestra<br><span class="font-bold">Expertise</span></h2>
+                <p class="text-gray-400 leading-relaxed mb-8">
+                    Abordamos cada proyecto con una mentalidad analítica y creativa. Desde el boceto inicial hasta la
+                    entrega de llaves.
+                </p>
+                <button
+                    class="bg-white text-black px-8 py-3 text-xs font-bold uppercase tracking-widest hover:bg-gray-200 transition-colors">
+                    Agendar Consulta
+                </button>
+            </div>
+
+            <div class="lg:col-span-8">
+                <div class="divide-y divide-white/20 border-t border-white/20">
+                    <div
+                        class="py-8 flex justify-between items-center group cursor-pointer hover:bg-white/5 px-4 transition-colors">
+                        <div class="flex items-center gap-8">
+                            <span class="text-white/30 font-mono">01</span>
+                            <h3 class="text-2xl font-light group-hover:translate-x-4 transition-transform">Diseño
+                                Arquitectónico</h3>
+                        </div>
+                        <i
+                            class="ph ph-arrow-up-right text-2xl opacity-0 group-hover:opacity-100 transition-opacity"></i>
+                    </div>
+                    <div
+                        class="py-8 flex justify-between items-center group cursor-pointer hover:bg-white/5 px-4 transition-colors">
+                        <div class="flex items-center gap-8">
+                            <span class="text-white/30 font-mono">02</span>
+                            <h3 class="text-2xl font-light group-hover:translate-x-4 transition-transform">Desarrollo
+                                Inmobiliario</h3>
+                        </div>
+                        <i
+                            class="ph ph-arrow-up-right text-2xl opacity-0 group-hover:opacity-100 transition-opacity"></i>
+                    </div>
+                    <div
+                        class="py-8 flex justify-between items-center group cursor-pointer hover:bg-white/5 px-4 transition-colors">
+                        <div class="flex items-center gap-8">
+                            <span class="text-white/30 font-mono">03</span>
+                            <h3 class="text-2xl font-light group-hover:translate-x-4 transition-transform">Diseño de
+                                Interiores</h3>
+                        </div>
+                        <i
+                            class="ph ph-arrow-up-right text-2xl opacity-0 group-hover:opacity-100 transition-opacity"></i>
+                    </div>
+                    <div
+                        class="py-8 flex justify-between items-center group cursor-pointer hover:bg-white/5 px-4 transition-colors">
+                        <div class="flex items-center gap-8">
+                            <span class="text-white/30 font-mono">04</span>
+                            <h3 class="text-2xl font-light group-hover:translate-x-4 transition-transform">Gestión de
+                                Obra</h3>
+                        </div>
+                        <i
+                            class="ph ph-arrow-up-right text-2xl opacity-0 group-hover:opacity-100 transition-opacity"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="bg-white pt-24 pb-12 border-t border-gray-200">
+        <div class="max-w-[1800px] mx-auto px-6 grid grid-cols-1 md:grid-cols-4 gap-12 mb-16">
+            <div class="col-span-1 md:col-span-2">
+                <div class="w-12 h-12 bg-black text-white flex items-center justify-center font-bold text-lg mb-6">V.
+                </div>
+                <h2 class="text-3xl font-light mb-4">Creemos Espacios Únicos.</h2>
+                <a href="mailto:hola@vantage.com"
+                    class="text-xl font-bold border-b-2 border-black hover:text-gray-500 hover:border-gray-500 transition-colors">hola@vantage.com.ar</a>
+            </div>
+
+            <div>
+                <h4 class="text-xs font-bold uppercase tracking-widest text-gray-400 mb-6">Oficina</h4>
+                <p class="text-sm leading-loose">
+                    Av. Alvear 1890, Piso 5<br>
+                    Recoleta, Buenos Aires<br>
+                    Argentina
+                </p>
+            </div>
+
+            <div>
+                <h4 class="text-xs font-bold uppercase tracking-widest text-gray-400 mb-6">Social</h4>
+                <div class="flex flex-col gap-2 text-sm font-medium">
+                    <a href="#" class="hover:translate-x-2 transition-transform">Instagram</a>
+                    <a href="#" class="hover:translate-x-2 transition-transform">LinkedIn</a>
+                    <a href="#" class="hover:translate-x-2 transition-transform">Behance</a>
+                </div>
+            </div>
+        </div>
+
+        <div
+            class="max-w-[1800px] mx-auto px-6 flex justify-between items-center text-xs text-gray-400 border-t border-gray-100 pt-8">
+            <p>© 2026 VANTAGE ARCHITECTS.</p>
+            <p>DESIGNED BY ANALISTA.DEV</p>
+        </div>
+    </footer>
+
+</body>
+
+</html>

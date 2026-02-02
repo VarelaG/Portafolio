@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NEXO | Urban Streetwear</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Space+Mono:ital,wght@0,400;0,700;1,400&display=swap"
+        rel="stylesheet">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'nexo-black': '#000000',
+                        'nexo-white': '#ffffff',
+                        'nexo-acid': '#CCFF00', // Verde Ácido característico
+                        'nexo-gray': '#f3f4f6',
+                    },
+                    fontFamily: {
+                        sans: ['Archivo Black', 'sans-serif'],
+                        mono: ['Space Mono', 'monospace'],
+                    },
+                    boxShadow: {
+                        'hard': '8px 8px 0px 0px #000000', // Sombra dura sólida
+                        'hard-sm': '4px 4px 0px 0px #000000',
+                        'hard-hover': '0px 0px 0px 0px #000000', // Efecto presionar
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        /* Animación Marquee (Texto que corre) */
+        .marquee-container {
+            overflow: hidden;
+            white-space: nowrap;
+        }
+
+        .marquee-content {
+            display: inline-block;
+            animation: marquee 20s linear infinite;
+        }
+
+        @keyframes marquee {
+            0% {
+                transform: translateX(0);
+            }
+
+            100% {
+                transform: translateX(-50%);
+            }
+        }
+
+        /* Utilería para bordes brutales */
+        .brutal-border {
+            border: 3px solid black;
+        }
+
+        /* Efecto Glitch simple en hover de texto */
+        .hover-glitch:hover {
+            text-shadow: 2px 2px 0px #CCFF00, -2px -2px 0px #ff00ff;
+        }
+    </style>
+</head>
+
+<body class="bg-white text-nexo-black overflow-x-hidden selection:bg-nexo-black selection:text-nexo-acid">
+
+    <div class="bg-nexo-black text-nexo-acid font-mono text-sm py-2 border-b-4 border-black marquee-container">
+        <div class="marquee-content">
+            ENVÍOS GRATIS A TODO EL PAÍS — NUEVA COLECCIÓN DROP #04 YA DISPONIBLE — 20% OFF PAGANDO CON CRIPTO — ENVÍOS
+            GRATIS A TODO EL PAÍS — NUEVA COLECCIÓN DROP #04 YA DISPONIBLE — 20% OFF PAGANDO CON CRIPTO —
+        </div>
+    </div>
+
+    <nav class="border-b-4 border-black bg-white sticky top-0 z-50">
+        <div class="max-w-screen-2xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-20">
+                <div class="flex-shrink-0 flex items-center gap-2">
+                    <div class="w-8 h-8 bg-nexo-acid border-2 border-black"></div>
+                    <span class="text-3xl tracking-tighter hover-glitch cursor-pointer">NEXO.</span>
+                </div>
+
+                <div class="hidden md:flex space-x-8 font-mono font-bold text-sm tracking-tighter">
+                    <a href="#" class="hover:bg-nexo-acid hover:text-black px-2 py-1 transition-colors">HOMBRE</a>
+                    <a href="#" class="hover:bg-nexo-acid hover:text-black px-2 py-1 transition-colors">MUJER</a>
+                    <a href="#" class="hover:bg-nexo-acid hover:text-black px-2 py-1 transition-colors">ACCESORIOS</a>
+                    <a href="#" class="text-red-600 hover:underline decoration-4 decoration-black">SALE</a>
+                </div>
+
+                <div class="flex items-center space-x-6">
+                    <i
+                        class="fa-solid fa-magnifying-glass text-xl cursor-pointer hover:text-nexo-acid transition-colors"></i>
+                    <div class="relative group cursor-pointer">
+                        <i class="fa-solid fa-bag-shopping text-xl"></i>
+                        <span
+                            class="absolute -top-3 -right-3 bg-nexo-acid text-black text-xs font-bold border-2 border-black h-6 w-6 flex items-center justify-center">3</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <header class="grid grid-cols-1 md:grid-cols-2 border-b-4 border-black min-h-[85vh]">
+        <div class="flex flex-col justify-center p-8 md:p-16 bg-white relative overflow-hidden">
+            <div class="absolute top-10 right-10 w-24 h-24 border-4 border-black rounded-full animate-spin-slow"></div>
+
+            <span class="font-mono font-bold bg-nexo-black text-white px-4 py-1 w-fit mb-6 rotate-2 inline-block">EST.
+                2026 // BUENOS AIRES</span>
+
+            <h1 class="text-7xl md:text-9xl leading-[0.85] mb-8 uppercase">
+                Urban<br>
+                <span class="text-nexo-acid text-stroke-black" style="-webkit-text-stroke: 3px black;">Chaos</span><br>
+                Theory
+            </h1>
+
+            <p class="font-mono text-lg md:text-xl mb-12 max-w-md border-l-4 border-nexo-acid pl-4">
+                La calle no pide permiso. Vestite para el ruido. La nueva colección de invierno rompe todas las reglas.
+            </p>
+
+            <div class="flex gap-4">
+                <button
+                    class="bg-black text-white font-mono font-bold px-8 py-4 border-2 border-black shadow-hard hover:translate-x-[4px] hover:translate-y-[4px] hover:shadow-hard-hover transition-all">
+                    COMPRAR AHORA
+                </button>
+                <button
+                    class="bg-nexo-acid text-black font-mono font-bold px-8 py-4 border-2 border-black shadow-hard hover:translate-x-[4px] hover:translate-y-[4px] hover:shadow-hard-hover transition-all">
+                    VER LOOKBOOK
+                </button>
+            </div>
+        </div>
+
+        <div class="relative border-t-4 md:border-t-0 md:border-l-4 border-black h-[50vh] md:h-auto group">
+            <img src="https://images.unsplash.com/photo-1552374196-1ab2a1c593e8?q=80&w=1887&auto=format&fit=crop"
+                alt="Streetwear Model"
+                class="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-500">
+
+            <div
+                class="absolute bottom-10 left-10 bg-white border-4 border-black p-4 shadow-hard transform -rotate-3 group-hover:rotate-0 transition-transform">
+                <p class="font-mono text-xs">FEATURED ITEM</p>
+                <p class="text-2xl">OVERSIZED HOODIE</p>
+                <p class="text-xl text-nexo-acid bg-black inline-block px-2">$45.000</p>
+            </div>
+        </div>
+    </header>
+
+    <div class="bg-nexo-acid border-b-4 border-black py-6 overflow-hidden">
+        <div class="marquee-container">
+            <div class="marquee-content text-4xl font-bold uppercase tracking-tighter">
+                NO RULES — JUST STYLE — URBAN CULTURE — LIMITED EDITION — NO RULES — JUST STYLE — URBAN CULTURE —
+                LIMITED EDITION —
+            </div>
+        </div>
+    </div>
+
+    <section class="grid grid-cols-1 md:grid-cols-3">
+        <div
+            class="group relative h-[500px] border-b-4 md:border-b-0 md:border-r-4 border-black overflow-hidden cursor-pointer">
+            <img src="https://images.unsplash.com/photo-1606107557195-0e29a4b5b4aa?q=80&w=1964&auto=format&fit=crop"
+                class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+                alt="Sneakers">
+            <div class="absolute inset-0 bg-black/20 group-hover:bg-transparent transition-colors"></div>
+            <div
+                class="absolute bottom-0 left-0 w-full bg-white border-t-4 border-black p-6 transform translate-y-full group-hover:translate-y-0 transition-transform duration-300">
+                <h3 class="text-3xl uppercase">Sneakers</h3>
+                <span class="font-mono text-sm underline">Ver 24 productos -></span>
+            </div>
+            <h3 class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-white text-5xl font-outline-2 opacity-100 group-hover:opacity-0 transition-opacity"
+                style="-webkit-text-stroke: 2px black;">KICKS</h3>
+        </div>
+
+        <div
+            class="group relative h-[500px] border-b-4 md:border-b-0 md:border-r-4 border-black overflow-hidden cursor-pointer">
+            <img src="https://images.unsplash.com/photo-1556821840-3a63f95609a7?q=80&w=1887&auto=format&fit=crop"
+                class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+                alt="Hoodies">
+            <div class="absolute inset-0 bg-black/20 group-hover:bg-transparent transition-colors"></div>
+            <div
+                class="absolute bottom-0 left-0 w-full bg-nexo-acid border-t-4 border-black p-6 transform translate-y-full group-hover:translate-y-0 transition-transform duration-300">
+                <h3 class="text-3xl uppercase">Hoodies</h3>
+                <span class="font-mono text-sm underline">Ver 18 productos -></span>
+            </div>
+            <h3 class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-white text-5xl font-outline-2 opacity-100 group-hover:opacity-0 transition-opacity"
+                style="-webkit-text-stroke: 2px black;">TOPS</h3>
+        </div>
+
+        <div class="group relative h-[500px] border-black overflow-hidden cursor-pointer">
+            <img src="https://images.unsplash.com/photo-1588117305388-c2631a279f82?q=80&w=1887&auto=format&fit=crop"
+                class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+                alt="Accessories">
+            <div class="absolute inset-0 bg-black/20 group-hover:bg-transparent transition-colors"></div>
+            <div
+                class="absolute bottom-0 left-0 w-full bg-white border-t-4 border-black p-6 transform translate-y-full group-hover:translate-y-0 transition-transform duration-300">
+                <h3 class="text-3xl uppercase">Accesorios</h3>
+                <span class="font-mono text-sm underline">Ver 32 productos -></span>
+            </div>
+            <h3 class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-white text-5xl font-outline-2 opacity-100 group-hover:opacity-0 transition-opacity"
+                style="-webkit-text-stroke: 2px black;">GEAR</h3>
+        </div>
+    </section>
+
+    <section class="py-20 px-4 md:px-8 max-w-screen-2xl mx-auto">
+        <div class="flex justify-between items-end mb-12 border-b-4 border-black pb-4">
+            <h2 class="text-5xl md:text-7xl">NUEVOS <span class="text-transparent"
+                    style="-webkit-text-stroke: 2px black;">DROPS</span></h2>
+            <a href="#" class="font-mono font-bold hover:bg-black hover:text-white px-4 py-2 transition-colors">VER TODO
+                -></a>
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+            <div class="group">
+                <div class="relative border-4 border-black bg-gray-100 aspect-[3/4] mb-4 overflow-hidden">
+                    <img src="https://images.unsplash.com/photo-1617137968427-85924c800a22?q=80&w=1887&auto=format&fit=crop"
+                        class="w-full h-full object-cover" alt="Product">
+                    <div
+                        class="absolute top-4 left-4 bg-nexo-acid px-2 font-mono font-bold text-xs border-2 border-black">
+                        NEW</div>
+                    <button
+                        class="absolute bottom-0 left-0 w-full bg-black text-white py-3 font-mono font-bold translate-y-full group-hover:translate-y-0 transition-transform duration-200">
+                        AÑADIR +
+                    </button>
+                </div>
+                <div class="flex justify-between items-start">
+                    <div>
+                        <h4 class="text-xl leading-none mb-1">Cyber Punk Tee</h4>
+                        <p class="font-mono text-sm text-gray-500">Heavy Cotton</p>
+                    </div>
+                    <span class="font-mono font-bold text-lg">$28.000</span>
+                </div>
+            </div>
+
+            <div class="group">
+                <div class="relative border-4 border-black bg-gray-100 aspect-[3/4] mb-4 overflow-hidden">
+                    <img src="https://images.unsplash.com/photo-1552374196-c4e7ffc6e126?q=80&w=1887&auto=format&fit=crop"
+                        class="w-full h-full object-cover" alt="Product">
+                    <button
+                        class="absolute bottom-0 left-0 w-full bg-black text-white py-3 font-mono font-bold translate-y-full group-hover:translate-y-0 transition-transform duration-200">
+                        AÑADIR +
+                    </button>
+                </div>
+                <div class="flex justify-between items-start">
+                    <div>
+                        <h4 class="text-xl leading-none mb-1">Cargo Pants V2</h4>
+                        <p class="font-mono text-sm text-gray-500">Technical Fabric</p>
+                    </div>
+                    <span class="font-mono font-bold text-lg">$62.000</span>
+                </div>
+            </div>
+
+            <div class="group">
+                <div class="relative border-4 border-black bg-gray-100 aspect-[3/4] mb-4 overflow-hidden">
+                    <img src="https://images.unsplash.com/photo-1575537302964-96cd47c06b1b?q=80&w=2070&auto=format&fit=crop"
+                        class="w-full h-full object-cover" alt="Product">
+                    <div
+                        class="absolute top-4 left-4 bg-black text-white px-2 font-mono font-bold text-xs border-2 border-white">
+                        SOLD OUT</div>
+                </div>
+                <div class="flex justify-between items-start opacity-50">
+                    <div>
+                        <h4 class="text-xl leading-none mb-1">Neon Beanie</h4>
+                        <p class="font-mono text-sm text-gray-500">Acrylic</p>
+                    </div>
+                    <span class="font-mono font-bold text-lg">$12.000</span>
+                </div>
+            </div>
+
+            <div class="group">
+                <div class="relative border-4 border-black bg-gray-100 aspect-[3/4] mb-4 overflow-hidden">
+                    <img src="https://images.unsplash.com/photo-1618354691373-d851c5c3a990?q=80&w=1915&auto=format&fit=crop"
+                        class="w-full h-full object-cover" alt="Product">
+                    <button
+                        class="absolute bottom-0 left-0 w-full bg-black text-white py-3 font-mono font-bold translate-y-full group-hover:translate-y-0 transition-transform duration-200">
+                        AÑADIR +
+                    </button>
+                </div>
+                <div class="flex justify-between items-start">
+                    <div>
+                        <h4 class="text-xl leading-none mb-1">Layered Jacket</h4>
+                        <p class="font-mono text-sm text-gray-500">Waterproof</p>
+                    </div>
+                    <span class="font-mono font-bold text-lg">$85.000</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="bg-nexo-acid border-t-4 border-b-4 border-black py-20">
+        <div class="max-w-4xl mx-auto px-4 text-center">
+            <h2 class="text-6xl md:text-8xl mb-6 uppercase">Don't Miss Out</h2>
+            <p class="font-mono text-xl mb-8 font-bold">Sumate al club. 10% OFF en tu primera compra.</p>
+
+            <form class="flex flex-col md:flex-row gap-4 max-w-lg mx-auto">
+                <input type="email" placeholder="TU EMAIL ACÁ..."
+                    class="w-full bg-white border-4 border-black p-4 font-mono font-bold placeholder-black focus:outline-none focus:bg-black focus:text-white transition-colors">
+                <button
+                    class="bg-black text-white font-mono font-bold px-8 py-4 border-4 border-black hover:bg-white hover:text-black transition-colors whitespace-nowrap">
+                    SUSCRIBIRSE
+                </button>
+            </form>
+        </div>
+    </section>
+
+    <footer class="bg-white py-12 px-4 md:px-8">
+        <div class="max-w-screen-2xl mx-auto grid grid-cols-1 md:grid-cols-4 gap-12">
+            <div class="md:col-span-2">
+                <h2 class="text-9xl leading-none tracking-tighter mb-4">NEXO.</h2>
+                <p class="font-mono max-w-sm">Ropa diseñada para el caos urbano. Fabricada en Buenos Aires, usada en
+                    todo el mundo.</p>
+            </div>
+
+            <div>
+                <h4 class="font-mono font-bold mb-4 bg-black text-white inline-block px-2">AYUDA</h4>
+                <ul class="space-y-2 font-mono text-sm">
+                    <li><a href="#" class="hover:bg-nexo-acid px-1">Envíos y Devoluciones</a></li>
+                    <li><a href="#" class="hover:bg-nexo-acid px-1">Guía de Talles</a></li>
+                    <li><a href="#" class="hover:bg-nexo-acid px-1">FAQ</a></li>
+                    <li><a href="#" class="hover:bg-nexo-acid px-1">Contacto</a></li>
+                </ul>
+            </div>
+
+            <div>
+                <h4 class="font-mono font-bold mb-4 bg-black text-white inline-block px-2">SOCIAL</h4>
+                <div class="flex gap-4 text-2xl">
+                    <i class="fa-brands fa-instagram hover:text-nexo-acid cursor-pointer transition-colors"></i>
+                    <i class="fa-brands fa-tiktok hover:text-nexo-acid cursor-pointer transition-colors"></i>
+                    <i class="fa-brands fa-twitter hover:text-nexo-acid cursor-pointer transition-colors"></i>
+                </div>
+            </div>
+        </div>
+
+        <div
+            class="max-w-screen-2xl mx-auto mt-12 pt-8 border-t-4 border-black flex flex-col md:flex-row justify-between font-mono text-xs">
+            <p>© 2026 NEXO STREETWEAR. TODOS LOS DERECHOS RESERVADOS.</p>
+            <p>DISEÑADO POR ANALISTA.DEV</p>
+        </div>
+    </footer>
+
+</body>
+
+</html>
