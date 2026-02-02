@@ -1,5 +1,5 @@
 import { HeroIntro } from './components/ui/HeroIntro' // Importá el nuevo
-import { HeroParallaxDemo } from './components/ui/HeroParallaxDemo'
+import { ProjectsShowcase } from './components/ui/ProjectsShowcase'
 import { CardHoverEffectDemo } from './components/ui/CardHoverEffectDemo'
 import { SignupFormDemo } from './components/ui/SignupFormDemo'
 import ContactSection from './components/ui/ContactSection' // Importá el nuevo
@@ -14,9 +14,9 @@ function App() {
         <HeroIntro />
       </div>
 
-      {/* 2. Proyectos (Parallax) */}
+      {/* 2. Proyectos Premium */}
       <div id="projects">
-        <HeroParallaxDemo />
+        <ProjectsShowcase />
       </div>
 
       {/* 3. Habilidades (Cards) */}

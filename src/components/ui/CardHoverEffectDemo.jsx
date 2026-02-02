@@ -1,8 +1,8 @@
 import { HoverEffect } from "./card-hover-effect";
-import { 
-  SiJavascript, SiReact, SiTailwindcss, SiAstro, 
-  SiOpenjdk, SiNodedotjs, SiPostgresql, SiMysql, 
-  SiGit, SiGithub 
+import {
+  SiJavascript, SiReact, SiNextdotjs, SiTailwindcss,
+  SiAstro, SiOpenjdk, SiNodedotjs, SiPostgresql,
+  SiMysql, SiGit, SiGithub, SiVite, SiVercel
 } from "react-icons/si";
 
 export function CardHoverEffectDemo() {
@@ -27,10 +27,22 @@ export const technologies = [
     link: "https://react.dev",
   },
   {
+    title: "Next.js",
+    icon: <SiNextdotjs className="text-white" />,
+    description: "Framework de React para aplicaciones web con renderizado del lado del servidor y generación estática.",
+    link: "https://nextjs.org",
+  },
+  {
     title: "Tailwind CSS",
     icon: <SiTailwindcss className="text-[#06B6D4]" />,
     description: "Framework de CSS basado en utilidades para diseños rápidos y responsivos.",
     link: "https://tailwindcss.com",
+  },
+  {
+    title: "Vite",
+    icon: <SiVite className="text-[#646CFF]" />,
+    description: "Build tool ultrarrápido con HMR instantáneo para desarrollo web moderno.",
+    link: "https://vitejs.dev",
   },
   {
     title: "Astro",
@@ -73,5 +85,11 @@ export const technologies = [
     icon: <SiGithub className="text-white" />,
     description: "Plataforma de colaboración y alojamiento de código para equipos globales.",
     link: "https://github.com",
+  },
+  {
+    title: "Vercel",
+    icon: <SiVercel className="text-white" />,
+    description: "Plataforma de deployment optimizada para frameworks frontend con CI/CD integrado.",
+    link: "https://vercel.com",
   },
 ];

@@ -66,7 +66,7 @@ export function HeroIntro() {
             transition={{ delay: 0.8 }}
             className="text-neutral-400 text-lg md:text-xl max-w-md leading-relaxed font-light"
           >
-            Desarrollador Full Stack enfocado en crear soluciones digitales de alto rendimiento con estéticas minimalistas.
+            Transformo ideas en experiencias digitales premium que combinan diseño excepcional con código limpio y escalable.
           </motion.p>
 
           {/* Botones de Acción (CV + Redes) */}
