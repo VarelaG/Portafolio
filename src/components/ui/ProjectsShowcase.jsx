@@ -228,14 +228,32 @@ export function ProjectsShowcase() {
                                 </motion.div>
                             )}
 
+
+
                             {/* Iframe con el proyecto HTML */}
-                            <iframe
-                                src={selectedProject.htmlPath}
-                                title={`${selectedProject.title} - ${selectedProject.subtitle}`}
-                                className="w-full h-full border-0 rounded-2xl"
-                                sandbox="allow-scripts allow-same-origin allow-forms allow-popups"
-                                onLoad={() => setIsIframeLoading(false)}
-                            />
+                            <div className="flex-1 relative overflow-hidden bg-neutral-900">
+                                {/* Wrapper para escalar el contenido desktop en móvil */}
+                                <div
+                                    className="w-full h-full origin-top-left"
+                                    style={{
+                                        transform: 'scale(var(--scale))',
+                                        '--scale': 'min(1, 100vw / 1440px)'
+                                    }}
+                                >
+                                    <iframe
+                                        src={selectedProject.htmlPath}
+                                        title={`${selectedProject.title} - ${selectedProject.subtitle}`}
+                                        className="border-0"
+                                        sandbox="allow-scripts allow-same-origin allow-forms allow-popups"
+                                        onLoad={() => setIsIframeLoading(false)}
+                                        style={{
+                                            width: '1440px',
+                                            height: 'calc(95vh / var(--scale))',
+                                            '--scale': 'min(1, 100vw / 1440px)'
+                                        }}
+                                    />
+                                </div>
+                            </div>
                         </motion.div>
                     </motion.div>
                 )}
