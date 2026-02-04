@@ -2,8 +2,10 @@ import { HoverEffect } from "./card-hover-effect";
 import {
   SiJavascript, SiReact, SiNextdotjs, SiTailwindcss,
   SiAstro, SiOpenjdk, SiNodedotjs, SiPostgresql,
-  SiMysql, SiGit, SiGithub, SiVite, SiVercel
+  SiMysql, SiGit, SiGithub, SiVite, SiVercel,
+  SiFramer
 } from "react-icons/si";
+import { TbSparkles } from "react-icons/tb";
 
 export function CardHoverEffectDemo() {
   return (
@@ -91,5 +93,17 @@ export const technologies = [
     icon: <SiVercel className="text-white" />,
     description: "Plataforma de deployment optimizada para frameworks frontend con CI/CD integrado.",
     link: "https://vercel.com",
+  },
+  {
+    title: "Framer Motion",
+    icon: <SiFramer className="text-[#0055FF]" />,
+    description: "Biblioteca de animaciones para React con API declarativa y potente.",
+    link: "https://www.framer.com/motion/",
+  },
+  {
+    title: "Antigravity",
+    icon: <TbSparkles className="text-[#00D9FF]" />,
+    description: "Asistente de IA avanzado para desarrollo de código y automatización.",
+    link: "#",
   },
 ];
