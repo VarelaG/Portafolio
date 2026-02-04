@@ -170,7 +170,7 @@ export function ProjectsShowcase() {
                         initial={{ opacity: 0 }}
                         animate={{ opacity: 1 }}
                         exit={{ opacity: 0 }}
-                        className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/95 backdrop-blur-xl"
+                        className="fixed inset-0 z-50 flex items-center justify-center bg-black/95 backdrop-blur-xl overflow-hidden"
                         onClick={closeModal}
                     >
                         <motion.div
@@ -178,7 +178,7 @@ export function ProjectsShowcase() {
                             animate={{ scale: 1, opacity: 1 }}
                             exit={{ scale: 0.8, opacity: 0 }}
                             transition={{ type: "spring", damping: 25, stiffness: 300 }}
-                            className="relative w-full h-full max-w-[95vw] max-h-[95vh] rounded-2xl overflow-hidden"
+                            className="relative w-full h-full rounded-none overflow-hidden"
                             onClick={(e) => e.stopPropagation()}
                         >
                             {/* Botón cerrar */}
@@ -228,32 +228,14 @@ export function ProjectsShowcase() {
                                 </motion.div>
                             )}
 
-
-
                             {/* Iframe con el proyecto HTML */}
-                            <div className="flex-1 relative overflow-hidden bg-neutral-900">
-                                {/* Wrapper para escalar el contenido desktop en móvil */}
-                                <div
-                                    className="w-full h-full origin-top-left"
-                                    style={{
-                                        transform: 'scale(var(--scale))',
-                                        '--scale': 'min(1, 100vw / 1440px)'
-                                    }}
-                                >
-                                    <iframe
-                                        src={selectedProject.htmlPath}
-                                        title={`${selectedProject.title} - ${selectedProject.subtitle}`}
-                                        className="border-0"
-                                        sandbox="allow-scripts allow-same-origin allow-forms allow-popups"
-                                        onLoad={() => setIsIframeLoading(false)}
-                                        style={{
-                                            width: '1440px',
-                                            height: 'calc(95vh / var(--scale))',
-                                            '--scale': 'min(1, 100vw / 1440px)'
-                                        }}
-                                    />
-                                </div>
-                            </div>
+                            <iframe
+                                src={selectedProject.htmlPath}
+                                title={`${selectedProject.title} - ${selectedProject.subtitle}`}
+                                className="w-full h-full border-0"
+                                sandbox="allow-scripts allow-same-origin allow-forms allow-popups"
+                                onLoad={() => setIsIframeLoading(false)}
+                            />
                         </motion.div>
                     </motion.div>
                 )}
