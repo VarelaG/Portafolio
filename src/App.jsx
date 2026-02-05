@@ -1,5 +1,6 @@
 import { HeroIntro } from './components/ui/HeroIntro' // Importá el nuevo
 import { ProjectsShowcase } from './components/ui/ProjectsShowcase'
+import { ParallaxSection } from './components/ui/ParallaxSection'
 import { CardHoverEffectDemo } from './components/ui/CardHoverEffectDemo'
 import { SignupFormDemo } from './components/ui/SignupFormDemo'
 import ContactSection from './components/ui/ContactSection' // Importá el nuevo
@@ -18,6 +19,9 @@ function App() {
       <div id="projects">
         <ProjectsShowcase />
       </div>
+
+      {/* Parallax Section */}
+      <ParallaxSection />
 
       {/* 3. Habilidades (Cards) */}
       <div id="tech" className="py-20">

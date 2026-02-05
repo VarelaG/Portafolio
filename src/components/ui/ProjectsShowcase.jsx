@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 
 // Importar las imágenes
@@ -6,11 +6,13 @@ import parrillaImg from '../../assets/parrilla_premium.png';
 import ropaImg from '../../assets/ropa_urbano.png';
 import yogaImg from '../../assets/yoga_alma.png';
 import arquitecturaImg from '../../assets/arquitectura_vantage.png';
+import porscheImg from '../../assets/porsche_preview.png'; // Updated with high contrast version
 
 export function ProjectsShowcase() {
     const [selectedProject, setSelectedProject] = useState(null);
     const [hoveredProject, setHoveredProject] = useState(null);
     const [isIframeLoading, setIsIframeLoading] = useState(true);
+    const [iframeScale, setIframeScale] = useState(1);
 
     const projects = [
         {
@@ -22,7 +24,8 @@ export function ProjectsShowcase() {
             image: parrillaImg,
             htmlPath: "/proyectos/parrilla_premium.html",
             tags: ["Next.js", "Tailwind", "Framer Motion"],
-            size: "large"
+            size: "large",
+            type: "html"
         },
         {
             id: 2,
@@ -33,7 +36,8 @@ export function ProjectsShowcase() {
             image: ropaImg,
             htmlPath: "/proyectos/ropa_urbano.html",
             tags: ["React", "Tailwind", "GSAP"],
-            size: "small"
+            size: "small",
+            type: "html"
         },
         {
             id: 3,
@@ -44,7 +48,8 @@ export function ProjectsShowcase() {
             image: yogaImg,
             htmlPath: "/proyectos/yoga_alma.html",
             tags: ["Next.js", "Framer Motion", "Tailwind"],
-            size: "small"
+            size: "small",
+            type: "html"
         },
         {
             id: 4,
@@ -55,18 +60,49 @@ export function ProjectsShowcase() {
             image: arquitecturaImg,
             htmlPath: "/proyectos/arquitectura_vantage.html",
             tags: ["React", "Three.js", "GSAP"],
-            size: "large"
+            size: "large",
+            type: "html"
+        },
+        {
+            id: 5,
+            title: "PORSCHE",
+            subtitle: "Luxury Experience",
+            category: "AUTOMOTIVE",
+            description: "Experiencia visual inmersiva con animación de secuencia de imágenes y diseño minimalista premium.",
+            image: "/proyectos/image.png",
+            videoPath: "/proyectos/porsche_video.mp4",
+            tags: ["React", "GSAP", "Canvas"],
+            size: "medium",
+            type: "video"
         }
     ];
 
     const handleProjectClick = (project) => {
         setIsIframeLoading(true);
         setSelectedProject(project);
+        // Ocultar scroll del body para que no se vea el navbar
+        document.body.style.overflow = 'hidden';
     };
 
     const closeModal = () => {
         setSelectedProject(null);
+        // Restaurar scroll del body
+        document.body.style.overflow = 'auto';
     };
+
+    // Calcular escala del iframe para forzar vista desktop
+    useEffect(() => {
+        const calculateScale = () => {
+            const desktopWidth = 1920;
+            const screenWidth = window.innerWidth;
+            const scale = screenWidth < desktopWidth ? screenWidth / desktopWidth : 1;
+            setIframeScale(scale);
+        };
+
+        calculateScale();
+        window.addEventListener('resize', calculateScale);
+        return () => window.removeEventListener('resize', calculateScale);
+    }, []);
 
     return (
         <section className="relative py-32 px-4 sm:px-6 lg:px-8 overflow-hidden bg-black" id="proyectos-premium">
@@ -139,7 +175,7 @@ export function ProjectsShowcase() {
                 </div>
 
                 {/* Segunda fila */}
-                <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
+                <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 mb-6">
 
                     {/* Proyecto 3 - Pequeño - Izquierda */}
                     <ProjectCard
@@ -161,6 +197,17 @@ export function ProjectsShowcase() {
 
                 </div>
 
+                {/* Tercera fila - Porsche */}
+                <div className="grid grid-cols-1 gap-6">
+                    <ProjectCard
+                        project={projects[4]}
+                        delay={0.5}
+                        className="lg:col-span-12"
+                        onClick={() => handleProjectClick(projects[4])}
+                        onHover={(isHovered) => setHoveredProject(isHovered ? projects[4] : null)}
+                    />
+                </div>
+
             </div>
 
             {/* Modal para proyecto completo */}
@@ -170,7 +217,7 @@ export function ProjectsShowcase() {
                         initial={{ opacity: 0 }}
                         animate={{ opacity: 1 }}
                         exit={{ opacity: 0 }}
-                        className="fixed inset-0 z-50 flex items-center justify-center bg-black/95 backdrop-blur-xl overflow-hidden"
+                        className="fixed inset-0 z-[9999] flex items-center justify-center bg-black/95 backdrop-blur-xl overflow-hidden"
                         onClick={closeModal}
                     >
                         <motion.div
@@ -178,7 +225,7 @@ export function ProjectsShowcase() {
                             animate={{ scale: 1, opacity: 1 }}
                             exit={{ scale: 0.8, opacity: 0 }}
                             transition={{ type: "spring", damping: 25, stiffness: 300 }}
-                            className="relative w-full h-full rounded-none overflow-hidden"
+                            className="relative w-full h-full flex items-center justify-center"
                             onClick={(e) => e.stopPropagation()}
                         >
                             {/* Botón cerrar */}
@@ -192,7 +239,7 @@ export function ProjectsShowcase() {
                             </button>
 
                             {/* Loader mientras carga el iframe */}
-                            {isIframeLoading && (
+                            {isIframeLoading && selectedProject.type === 'html' && (
                                 <motion.div
                                     initial={{ opacity: 0 }}
                                     animate={{ opacity: 1 }}
@@ -228,14 +275,59 @@ export function ProjectsShowcase() {
                                 </motion.div>
                             )}
 
-                            {/* Iframe con el proyecto HTML */}
-                            <iframe
-                                src={selectedProject.htmlPath}
-                                title={`${selectedProject.title} - ${selectedProject.subtitle}`}
-                                className="w-full h-full border-0"
-                                sandbox="allow-scripts allow-same-origin allow-forms allow-popups"
-                                onLoad={() => setIsIframeLoading(false)}
-                            />
+                            {/* Contenido del modal - HTML o Video */}
+                            {selectedProject.type === 'video' ? (
+                                // Modal de Video
+                                <div className="w-full h-full flex items-center justify-center p-4 md:p-8">
+                                    <video
+                                        src={selectedProject.videoPath}
+                                        controls
+                                        autoPlay
+                                        className="max-w-full max-h-full rounded-lg shadow-2xl"
+                                        style={{ maxHeight: '90vh', maxWidth: '90vw' }}
+                                    >
+                                        Tu navegador no soporta el elemento de video.
+                                    </video>
+                                </div>
+                            ) : (
+                                // Modal de HTML con viewport forzado a desktop
+                                <div className="w-full h-full bg-black overflow-auto flex items-start justify-center">
+                                    <div
+                                        style={{
+                                            // Contenedor ajustado al tamaño escalado del iframe
+                                            width: `${1920 * iframeScale}px`,
+                                            height: `${3000 * iframeScale}px`,
+                                            position: 'relative',
+                                        }}
+                                    >
+                                        <div
+                                            style={{
+                                                // Forzar ancho desktop fijo de 1920px
+                                                width: '1920px',
+                                                height: '3000px',
+                                                // En pantallas más pequeñas, escalar proporcionalmente
+                                                transform: `scale(${iframeScale})`,
+                                                transformOrigin: 'top center',
+                                                position: 'absolute',
+                                                left: '50%',
+                                                marginLeft: '-960px', // Centrar (mitad de 1920px)
+                                            }}
+                                        >
+                                            <iframe
+                                                src={selectedProject.htmlPath}
+                                                title={`${selectedProject.title} - ${selectedProject.subtitle}`}
+                                                className="border-0"
+                                                style={{
+                                                    width: '1920px',
+                                                    height: '3000px',
+                                                }}
+                                                sandbox="allow-scripts allow-same-origin allow-forms allow-popups"
+                                                onLoad={() => setIsIframeLoading(false)}
+                                            />
+                                        </div>
+                                    </div>
+                                </div>
+                            )}
                         </motion.div>
                     </motion.div>
                 )}
@@ -247,6 +339,10 @@ export function ProjectsShowcase() {
 // Componente de tarjeta de proyecto
 function ProjectCard({ project, delay, className, onClick, onHover }) {
     const isLarge = project.size === "large";
+    const isMedium = project.size === "medium";
+
+    // Altura dinámica basada en el tamaño
+    const cardHeight = isMedium ? "h-[400px]" : "h-[500px]";
 
     return (
         <motion.div
@@ -254,7 +350,7 @@ function ProjectCard({ project, delay, className, onClick, onHover }) {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ delay }}
-            className={`group relative h-[500px] rounded-3xl overflow-hidden cursor-pointer ${className}`}
+            className={`group relative ${cardHeight} rounded-3xl overflow-hidden cursor-pointer ${className}`}
             onClick={onClick}
             onMouseEnter={() => onHover(true)}
             onMouseLeave={() => onHover(false)}
