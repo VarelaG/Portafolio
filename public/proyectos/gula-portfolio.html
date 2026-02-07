@@ -1,0 +1,557 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GULA Burgers | The Best in Town</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,typography"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@400;600;800&family=Roboto+Condensed:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <script>
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              primary: "#D71920",
+              "background-light": "#F8FAFC",
+              "background-dark": "#18181B",
+              "neutral-dark": "#27272A",
+            },
+            fontFamily: {
+              display: ["Anton", "Impact", "sans-serif"],
+              sans: ["Inter", "sans-serif"],
+              body: ["'Roboto Condensed'", "sans-serif"],
+            },
+          },
+        },
+      };
+    </script>
+    <style>
+      .gula-text-shadow {
+        text-shadow: 2px 2px 0px rgba(0,0,0,0.2);
+      }
+      .checkered-pattern {
+        background-color: #ffffff;
+        background-image: 
+          linear-gradient(45deg, #D71920 25%, transparent 25%, transparent 75%, #D71920 75%, #D71920), 
+          linear-gradient(45deg, #D71920 25%, transparent 25%, transparent 75%, #D71920 75%, #D71920);
+        background-position: 0 0, 10px 10px;
+        background-size: 20px 20px;
+      }
+      .checkered-divider {
+        height: 20px;
+        background-image: linear-gradient(45deg, #D71920 25%, transparent 25%), 
+                          linear-gradient(-45deg, #D71920 25%, transparent 25%), 
+                          linear-gradient(45deg, transparent 75%, #D71920 75%), 
+                          linear-gradient(-45deg, transparent 75%, #D71920 75%);
+        background-size: 20px 20px;
+        background-position: 0 0, 0 10px, 10px -10px, -10px 0px;
+      }
+      html {
+        scroll-behavior: smooth;
+      }
+      .cart-count {
+        display: none;
+      }
+      .cart-count.active {
+        display: flex;
+      }
+    </style>
+</head>
+<body class="bg-background-light font-sans text-gray-900">
+    
+    <!-- Navbar -->
+    <nav class="fixed w-full z-50 bg-primary shadow-lg border-b-4 border-white/10">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="flex justify-between h-20 items-center">
+          <div class="flex-shrink-0 flex items-center gap-2">
+            <a href="#home" class="font-display text-4xl text-white tracking-wider gula-text-shadow">
+              GULA
+            </a>
+          </div>
+          
+          <div class="hidden md:flex space-x-8 items-center">
+            <a href="#home" class="text-white hover:text-gray-200 font-bold uppercase tracking-wide text-sm transition-colors">
+              Inicio
+            </a>
+            <a href="#menu" class="text-white hover:text-gray-200 font-bold uppercase tracking-wide text-sm transition-colors">
+              Nuestra Carta
+            </a>
+            <a href="#about" class="text-white hover:text-gray-200 font-bold uppercase tracking-wide text-sm transition-colors">
+              La Historia
+            </a>
+            
+            <div class="flex items-center gap-4">
+              <button onclick="addToCart()" class="relative bg-white text-primary p-2 rounded-full hover:bg-gray-100 transition-colors">
+                <span class="material-icons">shopping_cart</span>
+                <span id="cart-badge" class="cart-count absolute -top-1 -right-1 bg-yellow-400 text-xs font-bold text-black rounded-full h-5 w-5 items-center justify-center border-2 border-primary">
+                  0
+                </span>
+              </button>
+              <a href="#menu" class="bg-white text-primary px-6 py-2 rounded-full font-bold uppercase hover:bg-gray-100 transition-colors shadow-md">
+                Pedir Ahora
+              </a>
+            </div>
+          </div>
+
+          <div class="md:hidden flex items-center gap-4">
+            <button onclick="addToCart()" class="relative bg-white text-primary p-2 rounded-full">
+                <span class="material-icons">shopping_cart</span>
+                <span id="cart-badge-mobile" class="cart-count absolute -top-1 -right-1 bg-yellow-400 text-xs font-bold text-black rounded-full h-5 w-5 items-center justify-center border-2 border-primary">
+                  0
+                </span>
+            </button>
+            <button onclick="toggleMobileMenu()" class="text-white hover:text-gray-200">
+              <span id="menu-icon" class="material-icons text-3xl">menu</span>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Mobile Menu -->
+      <div id="mobile-menu" class="hidden md:hidden bg-primary border-t border-white/10 px-4 pt-2 pb-6 space-y-2">
+        <a href="#home" onclick="toggleMobileMenu()" class="block text-white font-bold uppercase py-3 border-b border-white/10">
+          Inicio
+        </a>
+        <a href="#menu" onclick="toggleMobileMenu()" class="block text-white font-bold uppercase py-3 border-b border-white/10">
+          Nuestra Carta
+        </a>
+        <a href="#about" onclick="toggleMobileMenu()" class="block text-white font-bold uppercase py-3 border-b border-white/10">
+          La Historia
+        </a>
+        <a href="#menu" onclick="toggleMobileMenu()" class="block bg-white text-primary text-center font-bold uppercase py-3 rounded-lg mt-4">
+          Pedir Ahora
+        </a>
+      </div>
+    </nav>
+
+    <!-- HOME SECTION -->
+    <section id="home" class="relative overflow-hidden pt-20">
+      <!-- Hero Section -->
+      <div class="relative min-h-screen flex items-center overflow-hidden">
+        <div class="absolute top-0 right-0 w-full md:w-1/2 h-full bg-primary -z-10 transform skew-x-12 translate-x-20 md:translate-x-32"></div>
+        <div class="absolute bottom-0 left-0 w-full h-8 checkered-pattern z-10 opacity-80"></div>
+        
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full flex flex-col md:flex-row items-center gap-12 py-12">
+          <div class="w-full md:w-1/2 space-y-8 z-10 text-center md:text-left">
+            <div class="inline-block px-4 py-1 bg-red-100 text-primary font-bold rounded-full text-sm tracking-wide mb-2 border border-primary/20">
+              🔥 JUNÍN, BS. AS.
+            </div>
+            <h1 class="font-display text-6xl md:text-8xl leading-none text-primary gula-text-shadow transform -rotate-2 origin-left">
+              LA MEJOR<br/>
+              <span class="text-gray-900">BURGER</span><br/>
+              DE JUNÍN
+            </h1>
+            <p class="text-lg md:text-xl text-gray-600 max-w-lg mx-auto md:mx-0 font-medium leading-relaxed">
+              Orgullosamente Juninenses. Smasheadas a la perfección, con ingredientes de calidad y el sabor que nos identifica.
+            </p>
+            <div class="flex flex-col sm:flex-row gap-4 justify-center md:justify-start pt-4">
+              <a href="#menu" class="bg-primary text-white px-8 py-4 rounded-lg font-display text-xl uppercase tracking-wider hover:bg-red-700 transition-transform transform hover:-translate-y-1 shadow-xl flex items-center justify-center gap-2 group text-center">
+                Pedir Ahora
+                <span class="material-icons group-hover:translate-x-1 transition-transform">shopping_cart</span>
+              </a>
+              <a href="#menu" class="bg-white text-primary border-2 border-primary px-8 py-4 rounded-lg font-display text-xl uppercase tracking-wider hover:bg-gray-50 transition-colors shadow-md text-center">
+                Ver la Carta
+              </a>
+            </div>
+          </div>
+          
+          <div class="w-full md:w-1/2 relative flex justify-center">
+            <div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[120%] h-[120%] bg-red-100 rounded-full blur-3xl -z-10 opacity-60"></div>
+            <div class="relative z-10 transform hover:scale-105 transition-transform duration-500">
+              <img 
+                alt="Smash burger Junín" 
+                class="w-full max-w-lg mx-auto drop-shadow-2xl rounded-2xl rotate-3" 
+                src="https://lh3.googleusercontent.com/aida-public/AB6AXuARts3zJomMEaqyQ3n1ZWsDak-9ZMKO8mS4xr4wajDGiqv7Jr8yrWv5n4bxo6jGW_6t1GKVZyjJdZltvlUitt23KAxmlyqksFx582w0N6ARnG7F3RuttbHaZEBnDy2AcPF2_8wxt-cdbhvF_HVJ93cYA2TEm7ySG4HAsaAGrlRLcF5_8GwXUpAxTOALgXcWjJnfgzZXdKGWOi_ANbdlETeyi7FtVgaTTCY1GxAWB3HMXB7oRMZLbiOWbYNuUa-ryqjBHPbqiRffNKE"
+              />
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Fan Favorites Section -->
+      <div class="py-24 bg-background-light">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div class="text-center mb-16">
+            <h2 class="font-display text-5xl text-gray-900 uppercase">Favoritas de la Gente</h2>
+            <div class="w-20 h-2 bg-primary mx-auto mt-4"></div>
+          </div>
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-10">
+            <!-- Junín Burger -->
+            <div class="bg-white rounded-2xl overflow-hidden shadow-lg border border-gray-100 group">
+              <div class="h-56 overflow-hidden">
+                <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuARts3zJomMEaqyQ3n1ZWsDak-9ZMKO8mS4xr4wajDGiqv7Jr8yrWv5n4bxo6jGW_6t1GKVZyjJdZltvlUitt23KAxmlyqksFx582w0N6ARnG7F3RuttbHaZEBnDy2AcPF2_8wxt-cdbhvF_HVJ93cYA2TEm7ySG4HAsaAGrlRLcF5_8GwXUpAxTOALgXcWjJnfgzZXdKGWOi_ANbdlETeyi7FtVgaTTCY1GxAWB3HMXB7oRMZLbiOWbYNuUa-ryqjBHPbqiRffNKE" alt="Junín Burger" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" />
+              </div>
+              <div class="p-6">
+                <h3 class="font-display text-2xl uppercase">Junín Burger</h3>
+                <p class="text-primary font-bold text-xl mt-2">$15.500</p>
+                <button onclick="addToCart()" class="w-full mt-4 bg-primary text-white py-3 rounded-xl font-bold uppercase hover:bg-red-700 transition-colors flex items-center justify-center gap-2">
+                  Agregar <span class="material-icons">add</span>
+                </button>
+              </div>
+            </div>
+            
+            <!-- Bacon Cheese -->
+            <div class="bg-white rounded-2xl overflow-hidden shadow-lg border border-gray-100 group">
+              <div class="h-56 overflow-hidden">
+                <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuCGNGiN7AvQ34PfeUUNFohC8EWc9K_5wA-uXrwrcO230p9_aFnIv_tMF-Q2H4WnndHTrl-14052uj-W3DAagVc1OXRXpmmu2OiDxwo7KW51M7CXvmNwnmZXDJpL0BUJvBDixes8CEDLtaVhpbWt7hqqGegKXWgyWGUNSeMeTN_D5vfDvxuLVJwlTj8Lu2rFsVHi-0103B3csyQKDA5NOOuM5A9vB-gO1CeSTCC3yuapIFvZouoilTf079gLXvdw1qVKYjQah3NXVPo" alt="Bacon Cheese" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" />
+              </div>
+              <div class="p-6">
+                <h3 class="font-display text-2xl uppercase">Bacon Cheese</h3>
+                <p class="text-primary font-bold text-xl mt-2">$15.200</p>
+                <button onclick="addToCart()" class="w-full mt-4 bg-primary text-white py-3 rounded-xl font-bold uppercase hover:bg-red-700 transition-colors flex items-center justify-center gap-2">
+                  Agregar <span class="material-icons">add</span>
+                </button>
+              </div>
+            </div>
+            
+            <!-- Grand Tasty -->
+            <div class="bg-white rounded-2xl overflow-hidden shadow-lg border border-gray-100 group">
+              <div class="h-56 overflow-hidden">
+                <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuCtNvUbQYtW_qbh0k_RlFQkYm7fSHeKs_q5yxlI2rYLSHPriPGvXhsYrliFjKoGXTIkltboyuJWidPr6DSPu2abmgOCtp4O6clE2ss2wRaHJO8de-sEhyaUk8j8xF0ckU_HBxy_k02Jh_OqOxqxLnOumAhMQfO_KyGu4FVK0pMIc8ZkhWdLxFMosST6wdtxqzcC7q-Y30KlGi_VlqBvehZ25gFF91Q5Snp3NdBdLlL2i2lMcMityL-7D0sORgi_xbmTqPSr6Rz6GqU" alt="Grand Tasty" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" />
+              </div>
+              <div class="p-6">
+                <h3 class="font-display text-2xl uppercase">Grand Tasty</h3>
+                <p class="text-primary font-bold text-xl mt-2">$15.500</p>
+                <button onclick="addToCart()" class="w-full mt-4 bg-primary text-white py-3 rounded-xl font-bold uppercase hover:bg-red-700 transition-colors flex items-center justify-center gap-2">
+                  Agregar <span class="material-icons">add</span>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- MENU SECTION -->
+    <section id="menu" class="bg-background-dark min-h-screen pt-24 pb-20">
+      <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+        
+        <!-- Menu Hero -->
+        <div class="text-center mb-12 py-12 border-b border-white/5">
+          <span class="text-primary font-display text-xl tracking-[0.4em] uppercase block mb-2">Carta Oficial 2025</span>
+          <h1 class="text-7xl md:text-8xl font-display text-white uppercase leading-none gula-text-shadow">
+            GULA <span class="text-transparent" style="-webkit-text-stroke: 2px #D71920">MENU</span>
+          </h1>
+          <p class="text-gray-500 mt-4 font-body uppercase tracking-widest text-sm">Disfrutá la experiencia completa en nuestro local de Junín</p>
+        </div>
+
+        <!-- Burgers Section 1 -->
+        <div class="space-y-4 mb-12">
+          <div class="flex justify-end gap-16 px-6 mb-2 text-[10px] font-bold uppercase text-primary tracking-[0.2em]">
+            <span>Simple I</span>
+            <span>Doble II</span>
+          </div>
+          
+          <!-- CHEESE BURGER -->
+          <div class="bg-neutral-dark/30 border-l-4 border-primary p-6 rounded-r-xl group">
+            <div class="flex flex-col md:flex-row md:items-center justify-between gap-4">
+              <div class="flex-grow">
+                <h3 class="text-xl md:text-2xl font-display text-white group-hover:text-primary transition-colors tracking-wide uppercase">
+                  CHEESE BURGER
+                </h3>
+                <p class="text-gray-400 text-xs mt-1 font-body uppercase tracking-tighter leading-tight max-w-xl">Carne, cheddar y salsa Thousand Island</p>
+              </div>
+              <div class="flex items-center gap-6 md:gap-10 justify-end min-w-[200px]">
+                <div class="text-center group/btn">
+                  <button onclick="addToCart()" class="block text-primary font-bold text-lg md:text-xl hover:scale-110 transition-transform">
+                    $14.500
+                    <span class="block text-[8px] text-white opacity-50 group-hover/btn:opacity-100 uppercase">Añadir Simple</span>
+                  </button>
+                </div>
+                <div class="text-center border-l border-white/10 pl-6 md:pl-10 group/btn2">
+                  <button onclick="addToCart()" class="block text-primary font-bold text-xl hover:scale-110 transition-transform">
+                    $16.500
+                    <span class="block text-[8px] text-white opacity-50 group-hover/btn2:opacity-100 uppercase">Añadir Doble</span>
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- BACON CHEESE -->
+          <div class="bg-neutral-dark/30 border-l-4 border-primary p-6 rounded-r-xl group">
+            <div class="flex flex-col md:flex-row md:items-center justify-between gap-4">
+              <div class="flex-grow">
+                <h3 class="text-xl md:text-2xl font-display text-white group-hover:text-primary transition-colors tracking-wide uppercase">
+                  BACON CHEESE
+                </h3>
+                <p class="text-gray-400 text-xs mt-1 font-body uppercase tracking-tighter leading-tight max-w-xl">Carne, cheddar, panceta ahumada y salsa Thousand Island</p>
+              </div>
+              <div class="flex items-center gap-6 md:gap-10 justify-end min-w-[200px]">
+                <div class="text-center group/btn">
+                  <button onclick="addToCart()" class="block text-primary font-bold text-lg md:text-xl hover:scale-110 transition-transform">
+                    $15.200
+                    <span class="block text-[8px] text-white opacity-50 group-hover/btn:opacity-100 uppercase">Añadir Simple</span>
+                  </button>
+                </div>
+                <div class="text-center border-l border-white/10 pl-6 md:pl-10 group/btn2">
+                  <button onclick="addToCart()" class="block text-primary font-bold text-xl hover:scale-110 transition-transform">
+                    $17.000
+                    <span class="block text-[8px] text-white opacity-50 group-hover/btn2:opacity-100 uppercase">Añadir Doble</span>
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- JUNÍN BURGER -->
+          <div class="bg-neutral-dark/30 border-l-4 border-primary p-6 rounded-r-xl group">
+            <div class="flex flex-col md:flex-row md:items-center justify-between gap-4">
+              <div class="flex-grow">
+                <div class="flex items-center gap-2">
+                  <h3 class="text-xl md:text-2xl font-display text-white group-hover:text-primary transition-colors tracking-wide uppercase">
+                    JUNÍN BURGER
+                  </h3>
+                  <span class="bg-red-600 text-white text-[8px] px-2 py-0.5 rounded font-bold uppercase tracking-widest">LOCAL PRIDE</span>
+                </div>
+                <p class="text-gray-400 text-xs mt-1 font-body uppercase tracking-tighter leading-tight max-w-xl">Carne, cheddar, panceta ahumada, huevo frito y salsa Thousand Island</p>
+              </div>
+              <div class="flex items-center gap-6 md:gap-10 justify-end min-w-[200px]">
+                <div class="text-center group/btn">
+                  <button onclick="addToCart()" class="block text-primary font-bold text-lg md:text-xl hover:scale-110 transition-transform">
+                    $15.500
+                    <span class="block text-[8px] text-white opacity-50 group-hover/btn:opacity-100 uppercase">Añadir Simple</span>
+                  </button>
+                </div>
+                <div class="text-center border-l border-white/10 pl-6 md:pl-10 group/btn2">
+                  <button onclick="addToCart()" class="block text-primary font-bold text-xl hover:scale-110 transition-transform">
+                    $18.000
+                    <span class="block text-[8px] text-white opacity-50 group-hover/btn2:opacity-100 uppercase">Añadir Doble</span>
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- GRAND TASTY -->
+          <div class="bg-neutral-dark/30 border-l-4 border-primary p-6 rounded-r-xl group">
+            <div class="flex flex-col md:flex-row md:items-center justify-between gap-4">
+              <div class="flex-grow">
+                <h3 class="text-xl md:text-2xl font-display text-white group-hover:text-primary transition-colors tracking-wide uppercase">
+                  GRAND TASTY
+                </h3>
+                <p class="text-gray-400 text-xs mt-1 font-body uppercase tracking-tighter leading-tight max-w-xl">Carne, cheddar, lechuga, tomate y salsa tasty original</p>
+              </div>
+              <div class="flex items-center gap-6 md:gap-10 justify-end min-w-[200px]">
+                <div class="text-center group/btn">
+                  <button onclick="addToCart()" class="block text-primary font-bold text-lg md:text-xl hover:scale-110 transition-transform">
+                    $15.500
+                    <span class="block text-[8px] text-white opacity-50 group-hover/btn:opacity-100 uppercase">Añadir Simple</span>
+                  </button>
+                </div>
+                <div class="text-center border-l border-white/10 pl-6 md:pl-10 group/btn2">
+                  <button onclick="addToCart()" class="block text-primary font-bold text-xl hover:scale-110 transition-transform">
+                    $17.500
+                    <span class="block text-[8px] text-white opacity-50 group-hover/btn2:opacity-100 uppercase">Añadir Doble</span>
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- MEXICANA -->
+          <div class="bg-neutral-dark/30 border-l-4 border-primary p-6 rounded-r-xl group">
+            <div class="flex flex-col md:flex-row md:items-center justify-between gap-4">
+              <div class="flex-grow">
+                <h3 class="text-xl md:text-2xl font-display text-white group-hover:text-primary transition-colors tracking-wide uppercase">
+                  MEXICANA 🇲🇽
+                </h3>
+                <p class="text-gray-400 text-xs mt-1 font-body uppercase tracking-tighter leading-tight max-w-xl">Carne, cheddar, guacamole, doritos y salsa picante nivel 🌶️🌶️🌶️</p>
+              </div>
+              <div class="flex items-center gap-6 md:gap-10 justify-end min-w-[200px]">
+                <div class="text-center group/btn">
+                  <button onclick="addToCart()" class="block text-primary font-bold text-lg md:text-xl hover:scale-110 transition-transform">
+                    $15.500
+                    <span class="block text-[8px] text-white opacity-50 group-hover/btn:opacity-100 uppercase">Añadir Simple</span>
+                  </button>
+                </div>
+                <div class="text-center border-l border-white/10 pl-6 md:pl-10 group/btn2">
+                  <button onclick="addToCart()" class="block text-primary font-bold text-xl hover:scale-110 transition-transform">
+                    $17.800
+                    <span class="block text-[8px] text-white opacity-50 group-hover/btn2:opacity-100 uppercase">Añadir Doble</span>
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Extras Section -->
+        <div class="mt-20">
+          <div class="flex justify-center mb-8">
+            <div class="relative group">
+               <div class="absolute -inset-1 bg-primary blur opacity-20 group-hover:opacity-40 transition duration-1000"></div>
+               <div class="relative bg-neutral-dark text-white px-16 py-4 rounded-xl font-display text-5xl uppercase skew-x-[-10deg] shadow-2xl border-2 border-primary/20">
+                <span class="skew-x-[10deg] block">EXTRAS</span>
+              </div>
+            </div>
+          </div>
+          
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <div class="bg-neutral-dark/20 p-8 rounded-2xl border border-white/5 flex flex-col items-center text-center group">
+              <h4 class="text-white font-display text-lg uppercase mb-4 leading-tight min-h-[3rem] flex items-center">MEDALLÓN Y DOBLE CHEDDAR EXTRA</h4>
+              <div class="w-12 h-1 bg-primary mb-4"></div>
+              <span class="text-primary font-bold text-3xl font-display">$3.500</span>
+              <button onclick="addToCart()" class="mt-6 bg-primary text-white px-8 py-2 rounded-full font-bold uppercase text-xs hover:bg-red-700 transition-colors">
+                Agregar
+              </button>
+            </div>
+            <div class="bg-neutral-dark/20 p-8 rounded-2xl border border-white/5 flex flex-col items-center text-center group">
+              <h4 class="text-white font-display text-lg uppercase mb-4 leading-tight min-h-[3rem] flex items-center">EXTRA CHEDDAR</h4>
+              <div class="w-12 h-1 bg-primary mb-4"></div>
+              <span class="text-primary font-bold text-3xl font-display">$2.000</span>
+              <button onclick="addToCart()" class="mt-6 bg-primary text-white px-8 py-2 rounded-full font-bold uppercase text-xs hover:bg-red-700 transition-colors">
+                Agregar
+              </button>
+            </div>
+            <div class="bg-neutral-dark/20 p-8 rounded-2xl border border-white/5 flex flex-col items-center text-center group">
+              <h4 class="text-white font-display text-lg uppercase mb-4 leading-tight min-h-[3rem] flex items-center">EXTRA PANCETA</h4>
+              <div class="w-12 h-1 bg-primary mb-4"></div>
+              <span class="text-primary font-bold text-3xl font-display">$2.500</span>
+              <button onclick="addToCart()" class="mt-6 bg-primary text-white px-8 py-2 rounded-full font-bold uppercase text-xs hover:bg-red-700 transition-colors">
+                Agregar
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <div class="mt-16 text-center text-gray-500 text-xs font-body tracking-widest uppercase py-8 border-t border-white/5">
+          <p>Precios sujetos a cambios sin previo aviso • Consultá promociones vigentes en el local</p>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ABOUT SECTION -->
+    <section id="about" class="pt-20">
+      <!-- Hero Story Section -->
+      <div class="relative pt-32 pb-24 overflow-hidden bg-primary">
+        <div class="absolute inset-0 opacity-10 bg-[url('https://www.transparenttextures.com/patterns/crinkled-paper.png')] mix-blend-overlay"></div>
+        <div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-0 pointer-events-none opacity-10">
+          <h1 class="font-display text-[15rem] md:text-[25rem] leading-none text-white select-none">GULA</h1>
+        </div>
+        <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col items-center text-center">
+          <div class="w-full max-w-2xl h-6 checkered-pattern bg-white mb-12"></div>
+          <h2 class="text-7xl md:text-[120px] font-display text-white uppercase tracking-tight leading-none drop-shadow-2xl mb-8 transform -rotate-2">
+            Hecho en <br/> 
+            <span class="text-transparent" style="-webkit-text-stroke: 2px white">Junín</span>
+          </h2>
+          <p class="mt-8 max-w-3xl text-2xl md:text-3xl text-white font-light tracking-wide leading-relaxed font-body">
+            GULA nació con un objetivo claro: que en nuestra ciudad se pueda comer una burger de nivel mundial. No somos una cadena, somos vecinos apasionados por el sabor real.
+          </p>
+          <div class="w-full max-w-2xl h-6 checkered-pattern bg-white mt-16"></div>
+        </div>
+      </div>
+
+      <!-- Philosophy Section -->
+      <div class="py-32 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div class="grid grid-cols-1 lg:grid-cols-2 gap-20 items-center">
+            <div class="space-y-10">
+              <h3 class="text-6xl font-display text-primary uppercase leading-tight border-l-8 border-primary pl-8">
+                El Ritual del Smash
+              </h3>
+              <p class="text-xl text-gray-700 font-body leading-loose">
+                En Junín, el asado es cultura, y nosotros llevamos esa pasión a la plancha. Usamos blends de carne seleccionados, picados frescos cada día, para lograr esa costrita caramelizada que solo un buen smash puede dar.
+              </p>
+              <div class="flex gap-8">
+                <div class="text-center">
+                  <span class="material-icons text-primary text-5xl">star</span>
+                  <p class="font-display uppercase mt-2">Calidad</p>
+                </div>
+                <div class="text-center">
+                  <span class="material-icons text-primary text-5xl">groups</span>
+                  <p class="font-display uppercase mt-2">Comunidad</p>
+                </div>
+              </div>
+            </div>
+            <div class="relative">
+              <img 
+                alt="Cocina Gula" 
+                class="rounded-3xl shadow-2xl transform rotate-3" 
+                src="https://lh3.googleusercontent.com/aida-public/AB6AXuAIZPxfUkvVFRbLU7CTslZzh2mlpe0zwfUIW8dfh_JKIFL0IZuyEP1m3l6a5EV8Hi2cMJt34LFrTcMoS56IIuUxQiYao7TSdmkBHwJ5jzQnaFWoOHYvENUg7QP3DFjdfMjL3H3x2nWiyoUEdOAF2Z41Fi-h7cK9hL0xk0ff4vML1PIa636JLNVZbki6paIJqWt2VcKOzBtBuPD2bxf0i28sXPRdkYTtdV6qSU07ycm082AwVPXnze4fD2d111ouZ1a1nzRtee2q4Tg" 
+              />
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="bg-primary text-white border-t-8 border-white/20">
+      <div class="w-full h-8 checkered-pattern opacity-10"></div>
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-12 mb-12">
+          <div class="col-span-1 md:col-span-2">
+            <span class="font-display text-5xl tracking-wider gula-text-shadow block mb-6">GULA</span>
+            <p class="max-w-xs text-white/80 leading-relaxed">
+              Sirviendo las mejores smash burgers de la zona desde 2025. Sabor auténtico, ingredientes premium y una experiencia audaz. Vení con hambre, andate feliz.
+            </p>
+          </div>
+          <div>
+            <h4 class="font-bold text-lg mb-4 uppercase tracking-widest border-b border-white/20 pb-2">Links Rápidos</h4>
+            <ul class="space-y-3">
+              <li><a class="text-white/80 hover:text-white transition-colors flex items-center gap-2" href="#home"><span class="material-icons text-sm">chevron_right</span> Inicio</a></li>
+              <li><a class="text-white/80 hover:text-white transition-colors flex items-center gap-2" href="#menu"><span class="material-icons text-sm">chevron_right</span> Menú</a></li>
+              <li><a class="text-white/80 hover:text-white transition-colors flex items-center gap-2" href="#about"><span class="material-icons text-sm">chevron_right</span> Nosotros</a></li>
+            </ul>
+          </div>
+          <div>
+            <h4 class="font-bold text-lg mb-4 uppercase tracking-widest border-b border-white/20 pb-2">Seguinos</h4>
+            <div class="flex space-x-4">
+              <a class="w-12 h-12 rounded-full bg-white/20 flex items-center justify-center hover:bg-white hover:text-primary transition-all transform hover:scale-110" href="#">
+                <svg class="w-6 h-6 fill-current" viewBox="0 0 24 24"><path d="M24 4.557c-.883.392-1.832.656-2.828.775 1.017-.609 1.798-1.574 2.165-2.724-.951.564-2.005.974-3.127 1.195-.897-.957-2.178-1.555-3.594-1.555-3.179 0-5.515 2.966-4.797 6.045-4.091-.205-7.719-2.165-10.148-5.144-1.29 2.213-.669 5.108 1.523 6.574-.806-.026-1.566-.247-2.229-.616-.054 2.281 1.581 4.415 3.949 4.89-.693.188-1.452.232-2.224.084.626 1.956 2.444 3.379 4.6 3.419-2.07 1.623-4.678 2.348-7.29 2.04 2.179 1.397 4.768 2.212 7.548 2.212 9.142 0 14.307-7.721 13.995-14.646.962-.695 1.797-1.562 2.457-2.549z"></path></svg>
+              </a>
+              <a class="w-12 h-12 rounded-full bg-white/20 flex items-center justify-center hover:bg-white hover:text-primary transition-all transform hover:scale-110" href="#">
+                <svg class="w-6 h-6 fill-current" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.85-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"></path></svg>
+              </a>
+            </div>
+          </div>
+        </div>
+        <div class="border-t border-white/20 pt-8 text-center text-sm text-white/60 font-body">
+          <p>© 2025 Gula Burgers. Todos los derechos reservados. Diseñado con glotonería.</p>
+        </div>
+      </div>
+    </footer>
+
+    <script>
+      let cartCount = 0;
+
+      function addToCart() {
+        cartCount++;
+        updateCartBadge();
+      }
+
+      function updateCartBadge() {
+        const badge = document.getElementById('cart-badge');
+        const badgeMobile = document.getElementById('cart-badge-mobile');
+        
+        badge.textContent = cartCount;
+        badgeMobile.textContent = cartCount;
+        
+        if (cartCount > 0) {
+          badge.classList.add('active');
+          badgeMobile.classList.add('active');
+        } else {
+          badge.classList.remove('active');
+          badgeMobile.classList.remove('active');
+        }
+      }
+
+      function toggleMobileMenu() {
+        const menu = document.getElementById('mobile-menu');
+        const icon = document.getElementById('menu-icon');
+        
+        if (menu.classList.contains('hidden')) {
+          menu.classList.remove('hidden');
+          icon.textContent = 'close';
+        } else {
+          menu.classList.add('hidden');
+          icon.textContent = 'menu';
+        }
+      }
+    </script>
+</body>
+</html>

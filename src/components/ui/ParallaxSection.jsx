@@ -1,19 +1,19 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import parallaxBg from '../../assets/parallax_bg.png';
+
 
 export function ParallaxSection() {
     return (
-        <section
-            className="relative h-[60vh] flex items-center justify-center overflow-hidden"
-            style={{
-                backgroundImage: `url(${parallaxBg})`,
-                backgroundAttachment: 'fixed',
-                backgroundPosition: 'center',
-                backgroundRepeat: 'no-repeat',
-                backgroundSize: 'cover',
-            }}
-        >
+        <section className="relative h-[60vh] flex items-center justify-center overflow-hidden">
+
+            {/* Imagen de fondo - Efecto parallax con bg-fixed */}
+            <div
+                className="absolute inset-0 bg-cover bg-center bg-no-repeat bg-fixed"
+                style={{
+                    backgroundImage: `url(/parallax_mate.jpg)`,
+                }}
+            ></div>
+
             {/* Overlay oscuro para mejorar legibilidad */}
             <div className="absolute inset-0 bg-black/60"></div>
 
@@ -26,16 +26,20 @@ export function ParallaxSection() {
                 transition={{ duration: 0.8 }}
             >
                 <motion.h2
-                    className="text-4xl md:text-6xl font-bold text-white mb-6"
+                    className="text-4xl md:text-6xl font-bold text-white mb-6 font-mono"
                     initial={{ opacity: 0, y: 20 }}
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
                     transition={{ duration: 0.8, delay: 0.2 }}
                 >
-                    El Código es{' '}
                     <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-blue-500">
-                        Arte en Movimiento
+                        while
                     </span>
+                    (mate.caliente) {'{ '}
+                    <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-blue-500">
+                        deploy();
+                    </span>
+                    {' }'}
                 </motion.h2>
 
                 <motion.p
@@ -45,7 +49,7 @@ export function ParallaxSection() {
                     viewport={{ once: true }}
                     transition={{ duration: 0.8, delay: 0.4 }}
                 >
-                    Cada línea de código es una oportunidad para crear experiencias extraordinarias
+                    Lanzando proyectos mientras el mate esté cebado
                 </motion.p>
 
                 {/* Línea decorativa */}

@@ -12,7 +12,6 @@ export function ProjectsShowcase() {
     const [selectedProject, setSelectedProject] = useState(null);
     const [hoveredProject, setHoveredProject] = useState(null);
     const [isIframeLoading, setIsIframeLoading] = useState(true);
-    const [iframeScale, setIframeScale] = useState(1);
 
     const projects = [
         {
@@ -74,6 +73,18 @@ export function ProjectsShowcase() {
             tags: ["React", "GSAP", "Canvas"],
             size: "medium",
             type: "video"
+        },
+        {
+            id: 6,
+            title: "GULA",
+            subtitle: "Burgers",
+            category: "GASTRONOMÍA",
+            description: "Landing page vibrante y audaz para hamburguesería local con diseño bold, sistema de menú interactivo y estética urbana moderna.",
+            image: "/proyectos/image copy.png",
+            htmlPath: "/proyectos/gula-portfolio.html",
+            tags: ["HTML", "Tailwind CSS", "JavaScript"],
+            size: "medium",
+            type: "html"
         }
     ];
 
@@ -90,19 +101,7 @@ export function ProjectsShowcase() {
         document.body.style.overflow = 'auto';
     };
 
-    // Calcular escala del iframe para forzar vista desktop
-    useEffect(() => {
-        const calculateScale = () => {
-            const desktopWidth = 1920;
-            const screenWidth = window.innerWidth;
-            const scale = screenWidth < desktopWidth ? screenWidth / desktopWidth : 1;
-            setIframeScale(scale);
-        };
 
-        calculateScale();
-        window.addEventListener('resize', calculateScale);
-        return () => window.removeEventListener('resize', calculateScale);
-    }, []);
 
     return (
         <section className="relative py-32 px-4 sm:px-6 lg:px-8 overflow-hidden bg-black" id="proyectos-premium">
@@ -197,15 +196,27 @@ export function ProjectsShowcase() {
 
                 </div>
 
-                {/* Tercera fila - Porsche */}
-                <div className="grid grid-cols-1 gap-6">
+                {/* Tercera fila - Porsche y Gula */}
+                <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
+
+                    {/* Proyecto 5 - Porsche - Izquierda */}
                     <ProjectCard
                         project={projects[4]}
                         delay={0.5}
-                        className="lg:col-span-12"
+                        className="lg:col-span-6"
                         onClick={() => handleProjectClick(projects[4])}
                         onHover={(isHovered) => setHoveredProject(isHovered ? projects[4] : null)}
                     />
+
+                    {/* Proyecto 6 - Gula - Derecha */}
+                    <ProjectCard
+                        project={projects[5]}
+                        delay={0.6}
+                        className="lg:col-span-6"
+                        onClick={() => handleProjectClick(projects[5])}
+                        onHover={(isHovered) => setHoveredProject(isHovered ? projects[5] : null)}
+                    />
+
                 </div>
 
             </div>
@@ -290,42 +301,15 @@ export function ProjectsShowcase() {
                                     </video>
                                 </div>
                             ) : (
-                                // Modal de HTML con viewport forzado a desktop
-                                <div className="w-full h-full bg-black overflow-auto flex items-start justify-center">
-                                    <div
-                                        style={{
-                                            // Contenedor ajustado al tamaño escalado del iframe
-                                            width: `${1920 * iframeScale}px`,
-                                            height: `${3000 * iframeScale}px`,
-                                            position: 'relative',
-                                        }}
-                                    >
-                                        <div
-                                            style={{
-                                                // Forzar ancho desktop fijo de 1920px
-                                                width: '1920px',
-                                                height: '3000px',
-                                                // En pantallas más pequeñas, escalar proporcionalmente
-                                                transform: `scale(${iframeScale})`,
-                                                transformOrigin: 'top center',
-                                                position: 'absolute',
-                                                left: '50%',
-                                                marginLeft: '-960px', // Centrar (mitad de 1920px)
-                                            }}
-                                        >
-                                            <iframe
-                                                src={selectedProject.htmlPath}
-                                                title={`${selectedProject.title} - ${selectedProject.subtitle}`}
-                                                className="border-0"
-                                                style={{
-                                                    width: '1920px',
-                                                    height: '3000px',
-                                                }}
-                                                sandbox="allow-scripts allow-same-origin allow-forms allow-popups"
-                                                onLoad={() => setIsIframeLoading(false)}
-                                            />
-                                        </div>
-                                    </div>
+                                // Modal de HTML responsivo
+                                <div className="w-full h-full overflow-auto">
+                                    <iframe
+                                        src={selectedProject.htmlPath}
+                                        title={`${selectedProject.title} - ${selectedProject.subtitle}`}
+                                        className="w-full h-full border-0"
+                                        sandbox="allow-scripts allow-same-origin allow-forms allow-popups"
+                                        onLoad={() => setIsIframeLoading(false)}
+                                    />
                                 </div>
                             )}
                         </motion.div>
