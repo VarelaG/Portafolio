@@ -69,10 +69,10 @@ export function ProjectsShowcase() {
             category: "AUTOMOTIVE",
             description: "Experiencia visual inmersiva con animación de secuencia de imágenes y diseño minimalista premium.",
             image: "/proyectos/image.png",
-            videoPath: "/proyectos/porsche_video.mp4",
+            htmlPath: "/proyectos/Porsche_Standalone/index.html",
             tags: ["React", "GSAP", "Canvas"],
             size: "medium",
-            type: "video"
+            type: "html"
         },
         {
             id: 6,

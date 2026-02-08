@@ -1,0 +1,581 @@
+<!DOCTYPE html>
+<html lang="es" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Porsche 911 GT3 RS - Configurator</title>
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- GSAP for Animations -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+    
+    <!-- Lucide Icons (via CDN as SVG sprites aren't easily available) -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <style>
+        /* Custom Scrollbar Hide */
+        .scrollbar-hide::-webkit-scrollbar {
+            display: none;
+        }
+        .scrollbar-hide {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+        
+        body {
+            background-color: #050505;
+            color: white;
+            font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+        }
+    </style>
+</head>
+<body class="bg-[#050505] min-h-screen text-white selection:bg-red-600 selection:text-white overflow-x-hidden">
+
+    <!-- HERO SECTION / SCROLL ANIMATION -->
+    <div id="porsche-scroll-container" class="relative h-[400vh] bg-[#050505]">
+        
+        <!-- Loading Screen -->
+        <div id="loader" class="fixed inset-0 z-50 flex flex-col items-center justify-center bg-[#050505] text-white transition-opacity duration-500">
+            <div class="w-64 h-1 bg-gray-800 rounded-full overflow-hidden">
+                <div id="loader-bar" class="h-full bg-white w-0 transition-all duration-300"></div>
+            </div>
+            <p id="loader-text" class="mt-4 font-mono text-xs text-gray-400">LOADING DATA... 0%</p>
+        </div>
+
+        <!-- Sticky Wrapper -->
+        <div class="sticky top-0 h-screen w-full overflow-hidden">
+            <canvas id="hero-canvas" class="block w-full h-full object-cover"></canvas>
+
+            <!-- Text Overlays -->
+            <div class="absolute inset-0 pointer-events-none flex items-center justify-center">
+
+                <!-- Stage 1 -->
+                <div id="stage-1" class="absolute text-center opacity-0 translate-y-12">
+                    <h1 class="text-6xl md:text-8xl font-bold uppercase tracking-tighter text-white">
+                        Porsche <span class="text-red-600">911</span> GT3 RS
+                    </h1>
+                    <p class="mt-4 text-xl font-light text-gray-300 tracking-widest uppercase">
+                        La forma sigue a la función
+                    </p>
+                </div>
+
+                <!-- Stage 2 -->
+                <div id="stage-2" class="absolute text-center max-w-2xl px-4 opacity-0 translate-y-12">
+                    <h2 class="text-5xl md:text-7xl font-bold uppercase tracking-tighter text-white">
+                        Aerodinámica Activa
+                    </h2>
+                    <p class="mt-4 text-lg text-gray-400">
+                        Presión extrema sobre el asfalto para un control absoluto.
+                    </p>
+                </div>
+
+                <!-- Stage 3 -->
+                <div id="stage-3" class="absolute text-center max-w-2xl px-4 opacity-0 translate-y-12">
+                    <h2 class="text-5xl md:text-7xl font-bold uppercase tracking-tighter text-white">
+                        Motor Bóxer 4.0L
+                    </h2>
+                    <p class="mt-4 text-lg text-gray-400">
+                        525 CV de pura aspiración natural. Línea roja a 9.000 rpm.
+                    </p>
+                </div>
+
+                <!-- Stage 4 - CTA -->
+                <div id="stage-4" class="absolute text-center pointer-events-auto opacity-0 translate-y-12">
+                    <button onclick="document.getElementById('specs').scrollIntoView({ behavior: 'smooth' })" 
+                            class="group relative inline-flex items-center justify-center px-8 py-4 overflow-hidden font-medium tracking-tighter text-white bg-white/10 backdrop-blur-sm border border-white/20 rounded-full transition-all hover:bg-white hover:text-black cursor-pointer">
+                        <span class="absolute w-0 h-0 transition-all duration-500 ease-out bg-white rounded-full group-hover:w-56 group-hover:h-56 opacity-10"></span>
+                        <span class="relative">CONFIGURAR MI UNIDAD</span>
+                    </button>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <!-- FEATURES SECTION -->
+    <section class="bg-[#050505] text-white py-32 px-6 md:px-12 relative overflow-hidden" id="features">
+        
+        <!-- Background Ambience -->
+        <div class="absolute top-0 right-0 w-1/2 h-full bg-gradient-to-l from-red-600/5 to-transparent pointer-events-none"></div>
+
+        <div class="max-w-7xl mx-auto relative z-10">
+            <!-- Header -->
+            <div class="feature-header mb-16 border-l-4 border-red-600 pl-6 opacity-0 -translate-x-12">
+                <h3 class="text-4xl md:text-6xl font-bold uppercase tracking-tighter mb-2">Performance</h3>
+                <p class="text-gray-400 max-w-xl text-lg">Cifras que definen la superioridad en cada curva.</p>
+            </div>
+
+            <!-- Features Grid -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-40">
+                <!-- Feature 1 -->
+                <div class="feature-card group bg-white/5 backdrop-blur-sm p-8 border border-white/5 hover:border-red-600/50 transition-colors duration-500 relative overflow-hidden opacity-0 translate-y-12">
+                    <div class="absolute inset-0 bg-gradient-to-br from-white/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                    <div class="relative z-10">
+                        <i data-lucide="zap" class="w-8 h-8 mb-4 text-red-600 transition-all duration-300 group-hover:scale-110 group-hover:text-red-500"></i>
+                        <div class="text-5xl font-bold tracking-tighter mb-2">3.2s</div>
+                        <div class="text-sm text-gray-400 uppercase tracking-widest mb-1 group-hover:text-white transition-colors">Aceleración</div>
+                        <div class="text-xs text-gray-500 font-mono">0-100 km/h</div>
+                    </div>
+                </div>
+                <!-- Feature 2 -->
+                <div class="feature-card group bg-white/5 backdrop-blur-sm p-8 border border-white/5 hover:border-red-600/50 transition-colors duration-500 relative overflow-hidden opacity-0 translate-y-12">
+                    <div class="absolute inset-0 bg-gradient-to-br from-white/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                    <div class="relative z-10">
+                        <i data-lucide="wind" class="w-8 h-8 mb-4 text-red-600 transition-all duration-300 group-hover:scale-110 group-hover:text-red-500"></i>
+                        <div class="text-5xl font-bold tracking-tighter mb-2">DRS</div>
+                        <div class="text-sm text-gray-400 uppercase tracking-widest mb-1 group-hover:text-white transition-colors">Aerodinámica</div>
+                        <div class="text-xs text-gray-500 font-mono">Sistema Activo</div>
+                    </div>
+                </div>
+                <!-- Feature 3 -->
+                <div class="feature-card group bg-white/5 backdrop-blur-sm p-8 border border-white/5 hover:border-red-600/50 transition-colors duration-500 relative overflow-hidden opacity-0 translate-y-12">
+                    <div class="absolute inset-0 bg-gradient-to-br from-white/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                    <div class="relative z-10">
+                        <i data-lucide="weight" class="w-8 h-8 mb-4 text-red-600 transition-all duration-300 group-hover:scale-110 group-hover:text-red-500"></i>
+                        <div class="text-5xl font-bold tracking-tighter mb-2">1,450 kg</div>
+                        <div class="text-sm text-gray-400 uppercase tracking-widest mb-1 group-hover:text-white transition-colors">Peso Ligero</div>
+                        <div class="text-xs text-gray-500 font-mono">Construcción CFRP</div>
+                    </div>
+                </div>
+                <!-- Feature 4 -->
+                <div class="feature-card group bg-white/5 backdrop-blur-sm p-8 border border-white/5 hover:border-red-600/50 transition-colors duration-500 relative overflow-hidden opacity-0 translate-y-12">
+                    <div class="absolute inset-0 bg-gradient-to-br from-white/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                    <div class="relative z-10">
+                        <i data-lucide="settings" class="w-8 h-8 mb-4 text-red-600 transition-all duration-300 group-hover:scale-110 group-hover:text-red-500"></i>
+                        <div class="text-5xl font-bold tracking-tighter mb-2">PDK</div>
+                        <div class="text-sm text-gray-400 uppercase tracking-widest mb-1 group-hover:text-white transition-colors">Transmisión</div>
+                        <div class="text-xs text-gray-500 font-mono">7 Velocidades</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Driving Modes Header -->
+            <div class="modes-header mb-16 border-l-4 border-red-600 pl-6 flex items-end justify-between flex-wrap gap-4 opacity-0 -translate-x-12">
+                <div>
+                    <h3 class="text-4xl md:text-6xl font-bold uppercase tracking-tighter mb-2">Driving Modes</h3>
+                    <p class="text-gray-400 max-w-xl text-lg">Adaptabilidad instantánea para cualquier escenario.</p>
+                </div>
+            </div>
+
+            <!-- Modes Grid -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- Mode 1 -->
+                <div class="mode-card p-10 border border-white/5 bg-gradient-to-b from-neutral-900 to-red-950/20 group relative overflow-hidden hover:border-white/20 transition-all duration-500 opacity-0 translate-y-12">
+                    <div class="absolute top-0 right-0 p-4 opacity-5 font-bold text-9xl translate-x-1/4 -translate-y-1/4 group-hover:scale-110 group-hover:opacity-10 transition-all duration-700">1</div>
+                    <div class="relative z-10 h-full flex flex-col justify-between">
+                        <div>
+                            <h4 class="text-3xl font-bold mb-1 tracking-tighter">TRACK</h4>
+                            <span class="text-xs font-mono text-red-500 uppercase tracking-widest mb-6 block">Maximum performance</span>
+                            <p class="text-gray-400 leading-relaxed mb-8">Optimización total para circuito. Ajustes individuales de suspensión y diferencial en tiempo real.</p>
+                        </div>
+                        <div class="flex items-center text-sm font-bold uppercase tracking-widest gap-2 opacity-0 -translate-x-4 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-300 text-red-500">
+                            Explorar <i data-lucide="arrow-right" class="w-4 h-4"></i>
+                        </div>
+                    </div>
+                </div>
+                <!-- Mode 2 -->
+                <div class="mode-card p-10 border border-white/5 bg-gradient-to-b from-neutral-900 to-blue-950/20 group relative overflow-hidden hover:border-white/20 transition-all duration-500 opacity-0 translate-y-12">
+                     <div class="absolute top-0 right-0 p-4 opacity-5 font-bold text-9xl translate-x-1/4 -translate-y-1/4 group-hover:scale-110 group-hover:opacity-10 transition-all duration-700">2</div>
+                    <div class="relative z-10 h-full flex flex-col justify-between">
+                        <div>
+                            <h4 class="text-3xl font-bold mb-1 tracking-tighter">STREET</h4>
+                            <span class="text-xs font-mono text-red-500 uppercase tracking-widest mb-6 block">Daily usability</span>
+                            <p class="text-gray-400 leading-relaxed mb-8">Ingeniería de precisión adaptada al uso diario sin sacrificar el carácter deportivo.</p>
+                        </div>
+                        <div class="flex items-center text-sm font-bold uppercase tracking-widest gap-2 opacity-0 -translate-x-4 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-300 text-red-500">
+                            Explorar <i data-lucide="arrow-right" class="w-4 h-4"></i>
+                        </div>
+                    </div>
+                </div>
+                <!-- Mode 3 -->
+                <div class="mode-card p-10 border border-white/5 bg-gradient-to-b from-neutral-900 to-yellow-950/20 group relative overflow-hidden hover:border-white/20 transition-all duration-500 opacity-0 translate-y-12">
+                     <div class="absolute top-0 right-0 p-4 opacity-5 font-bold text-9xl translate-x-1/4 -translate-y-1/4 group-hover:scale-110 group-hover:opacity-10 transition-all duration-700">3</div>
+                    <div class="relative z-10 h-full flex flex-col justify-between">
+                        <div>
+                            <h4 class="text-3xl font-bold mb-1 tracking-tighter">HERITAGE</h4>
+                            <span class="text-xs font-mono text-red-500 uppercase tracking-widest mb-6 block">Legacy inspired</span>
+                            <p class="text-gray-400 leading-relaxed mb-8">Un tributo a la historia del 911. Colores y acabados que evocan la era dorada.</p>
+                        </div>
+                        <div class="flex items-center text-sm font-bold uppercase tracking-widest gap-2 opacity-0 -translate-x-4 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-300 text-red-500">
+                            Explorar <i data-lucide="arrow-right" class="w-4 h-4"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- DETAILS CAROUSEL -->
+    <section class="py-24 bg-[#050505] relative overflow-hidden border-t border-white/5">
+        <div class="container mx-auto px-6 mb-12 flex justify-between items-end">
+            <div>
+                <h2 class="text-4xl md:text-5xl font-bold uppercase tracking-tighter text-white mb-2">Detalles</h2>
+                <p class="text-gray-400">La perfección está en cada componente.</p>
+            </div>
+            <div class="hidden md:flex gap-2">
+                <div class="w-12 h-1 bg-white/20 rounded-full"></div>
+                <div class="w-4 h-1 bg-red-600 rounded-full"></div>
+            </div>
+        </div>
+
+        <div class="flex overflow-x-auto gap-6 px-6 pb-12 snap-x snap-mandatory scrollbar-hide" style="scrollbar-width: none; -ms-overflow-style: none;">
+            <!-- Carousel Item 1 -->
+            <div class="relative flex-none w-[85vw] md:w-[600px] h-[500px] rounded-2xl overflow-hidden snap-center group cursor-pointer border border-white/10 hover:scale-[0.98] transition-transform duration-300">
+                 <!-- Make sure image paths are updated to assume assets folder structure -->
+                <img src="images/porsche-wheel.png" alt="Wheel" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
+                <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent p-8 flex flex-col justify-end">
+                    <h3 class="text-3xl font-bold uppercase text-white mb-1 translate-y-4 group-hover:translate-y-0 transition-transform duration-500">Magnesium Wheels</h3>
+                    <p class="text-gray-300 translate-y-4 opacity-0 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-500 delay-100">Center-lock mechanism.</p>
+                </div>
+            </div>
+             <!-- Carousel Item 2 -->
+             <div class="relative flex-none w-[85vw] md:w-[600px] h-[500px] rounded-2xl overflow-hidden snap-center group cursor-pointer border border-white/10 hover:scale-[0.98] transition-transform duration-300">
+                <img src="images/porsche-bumper.png" alt="Rear" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
+                <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent p-8 flex flex-col justify-end">
+                    <h3 class="text-3xl font-bold uppercase text-white mb-1 translate-y-4 group-hover:translate-y-0 transition-transform duration-500">Carbon Rear</h3>
+                    <p class="text-gray-300 translate-y-4 opacity-0 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-500 delay-100">Optimized airflow.</p>
+                </div>
+            </div>
+             <!-- Carousel Item 3 -->
+             <div class="relative flex-none w-[85vw] md:w-[600px] h-[500px] rounded-2xl overflow-hidden snap-center group cursor-pointer border border-white/10 hover:scale-[0.98] transition-transform duration-300">
+                <img src="images/porsche-headlight.png" alt="Light" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
+                <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent p-8 flex flex-col justify-end">
+                    <h3 class="text-3xl font-bold uppercase text-white mb-1 translate-y-4 group-hover:translate-y-0 transition-transform duration-500">Matrix LED</h3>
+                    <p class="text-gray-300 translate-y-4 opacity-0 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-500 delay-100">Intelligent lighting.</p>
+                </div>
+            </div>
+             <!-- Carousel Item 4 -->
+             <div class="relative flex-none w-[85vw] md:w-[600px] h-[500px] rounded-2xl overflow-hidden snap-center group cursor-pointer border border-white/10 hover:scale-[0.98] transition-transform duration-300">
+                <img src="images/porsche-interior.png" alt="Interior" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
+                <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent p-8 flex flex-col justify-end">
+                    <h3 class="text-3xl font-bold uppercase text-white mb-1 translate-y-4 group-hover:translate-y-0 transition-transform duration-500">Race Cockpit</h3>
+                    <p class="text-gray-300 translate-y-4 opacity-0 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-500 delay-100">Driver focused.</p>
+                </div>
+            </div>
+            
+            <div class="flex-none w-6"></div>
+        </div>
+    </section>
+
+    <!-- SPECS SECTION -->
+    <section id="specs" class="bg-[#050505] text-white py-32 px-6 md:px-12 border-t border-white/5 relative overflow-hidden">
+        <!-- Tech Grid Background -->
+        <div class="absolute inset-0 opacity-[0.03]" style="background-image: linear-gradient(to right, #ffffff 1px, transparent 1px), linear-gradient(to bottom, #ffffff 1px, transparent 1px); background-size: 40px 40px;"></div>
+
+        <div class="max-w-5xl mx-auto relative z-10">
+            <h3 class="specs-element text-4xl md:text-6xl font-bold uppercase tracking-tighter mb-16 border-l-4 border-red-600 pl-6 opacity-0 -translate-x-6">
+                Especificaciones Técnicas
+            </h3>
+
+            <div class="overflow-hidden border-t sm:border border-white/10 sm:rounded-sm">
+                <table class="w-full text-left border-collapse">
+                    <tbody id="specs-table-body">
+                        <!-- Rows injected via JS or static HTML -->
+                        <tr class="specs-row border-b border-white/10 hover:bg-white/5 transition-colors group cursor-default opacity-0 -translate-x-6">
+                            <td class="p-6 font-mono text-sm uppercase text-gray-500 w-1/2 xs:w-1/3 group-hover:text-red-500 transition-colors">Configuración del motor</td>
+                            <td class="p-6 text-xl font-medium tracking-tight">Motor Bóxer de 6 cilindros atmosférico</td>
+                        </tr>
+                        <tr class="specs-row border-b border-white/10 hover:bg-white/5 transition-colors group cursor-default opacity-0 -translate-x-6">
+                            <td class="p-6 font-mono text-sm uppercase text-gray-500 w-1/2 xs:w-1/3 group-hover:text-red-500 transition-colors">Cilindrada</td>
+                            <td class="p-6 text-xl font-medium tracking-tight">3,996 cm³</td>
+                        </tr>
+                        <tr class="specs-row border-b border-white/10 hover:bg-white/5 transition-colors group cursor-default opacity-0 -translate-x-6">
+                            <td class="p-6 font-mono text-sm uppercase text-gray-500 w-1/2 xs:w-1/3 group-hover:text-red-500 transition-colors">Potencia</td>
+                            <td class="p-6 text-xl font-medium tracking-tight">386 kW (525 CV)</td>
+                        </tr>
+                        <tr class="specs-row border-b border-white/10 hover:bg-white/5 transition-colors group cursor-default opacity-0 -translate-x-6">
+                            <td class="p-6 font-mono text-sm uppercase text-gray-500 w-1/2 xs:w-1/3 group-hover:text-red-500 transition-colors">Par Motor Máximo</td>
+                            <td class="p-6 text-xl font-medium tracking-tight">465 Nm</td>
+                        </tr>
+                        <tr class="specs-row border-b border-white/10 hover:bg-white/5 transition-colors group cursor-default opacity-0 -translate-x-6">
+                            <td class="p-6 font-mono text-sm uppercase text-gray-500 w-1/2 xs:w-1/3 group-hover:text-red-500 transition-colors">0 - 100 km/h</td>
+                            <td class="p-6 text-xl font-medium tracking-tight">3.2 s</td>
+                        </tr>
+                         <tr class="specs-row border-b border-white/10 hover:bg-white/5 transition-colors group cursor-default opacity-0 -translate-x-6">
+                            <td class="p-6 font-mono text-sm uppercase text-gray-500 w-1/2 xs:w-1/3 group-hover:text-red-500 transition-colors">Velocidad Máxima</td>
+                            <td class="p-6 text-xl font-medium tracking-tight">296 km/h</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="bg-[#050505] text-white pt-32 pb-12 overflow-hidden relative opacity-0 transition-opacity duration-1000" id="main-footer">
+        <div class="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-white/20 to-transparent"></div>
+        <div class="container mx-auto px-6 flex flex-col items-center justify-center text-center">
+            
+            <div class="mb-16 opacity-30 invert brightness-0 grayscale relative w-64 h-12 md:w-96 md:h-20">
+                <img src="images/porsche_logo_white.png" alt="Porsche" class="w-full h-full object-contain">
+            </div>
+
+            <nav class="flex flex-wrap justify-center gap-8 md:gap-16 mb-16 text-sm uppercase tracking-widest font-light text-gray-400">
+                <a href="#" class="hover:text-white hover:scale-105 transition-all duration-300">Modelos</a>
+                <a href="#" class="hover:text-white hover:scale-105 transition-all duration-300">Marca</a>
+                <a href="#" class="hover:text-white hover:scale-105 transition-all duration-300">Eventos & Racing</a>
+                <a href="#" class="hover:text-white hover:scale-105 transition-all duration-300">Servicios</a>
+            </nav>
+
+            <div class="w-full max-w-4xl border-t border-white/5 pt-8 flex flex-col md:flex-row justify-between items-center gap-6 text-xs text-gray-600 font-mono">
+                <div class="flex gap-4"><span>© 2024 Dr. Ing. h.c. F. Porsche AG.</span></div>
+                <div class="flex gap-6">
+                    <a href="#" class="hover:text-white transition-colors uppercase tracking-wider">Instagram</a>
+                    <a href="#" class="hover:text-white transition-colors uppercase tracking-wider">Youtube</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- LOGIC SCRIPT -->
+    <script>
+        // Initialize Lucide Icons
+        lucide.createIcons();
+
+        // Register GSAP ScrollTrigger
+        gsap.registerPlugin(ScrollTrigger);
+
+        // --- PORSCHE SCROLL LOGIC ---
+        const frames = [
+          "frames/img_00001.webp","frames/img_00005.webp","frames/img_00010.webp","frames/img_00013.webp","frames/img_00018.webp",
+          "frames/img_00022.webp","frames/img_00026.webp","frames/img_00030.webp","frames/img_00033.webp","frames/img_00037.webp",
+          "frames/img_00042.webp","frames/img_00046.webp","frames/img_00051.webp","frames/img_00055.webp","frames/img_00058.webp",
+          "frames/img_00062.webp","frames/img_00066.webp","frames/img_00070.webp","frames/img_00074.webp","frames/img_00078.webp",
+          "frames/img_00082.webp","frames/img_00086.webp","frames/img_00090.webp","frames/img_00094.webp","frames/img_00098.webp",
+          "frames/img_00102.webp","frames/img_00106.webp","frames/img_00110.webp","frames/img_00114.webp","frames/img_00118.webp",
+          "frames/img_00121.webp","frames/img_00126.webp","frames/img_00130.webp","frames/img_00133.webp","frames/img_00138.webp",
+          "frames/img_00142.webp","frames/img_00145.webp","frames/img_00150.webp","frames/img_00153.webp","frames/img_00157.webp",
+          "frames/img_00162.webp","frames/img_00166.webp","frames/img_00169.webp","frames/img_00174.webp","frames/img_00178.webp",
+          "frames/img_00181.webp","frames/img_00186.webp","frames/img_00190.webp"
+        ];
+
+        const canvas = document.getElementById('hero-canvas');
+        const context = canvas.getContext('2d');
+        const images = [];
+        const sequencing = { frame: 0 };
+
+        // Preload Images
+        let loadedCount = 0;
+        const loader = document.getElementById('loader');
+        const loaderBar = document.getElementById('loader-bar');
+        const loaderText = document.getElementById('loader-text');
+
+        frames.forEach((src, i) => {
+            const img = new Image();
+            img.src = src; // Path relative to index.html (assumed /frames folder)
+            img.onload = () => {
+                loadedCount++;
+                const progress = Math.round((loadedCount / frames.length) * 100);
+                loaderBar.style.width = `${progress}%`;
+                loaderText.innerText = `LOADING DATA... ${progress}%`;
+                
+                if (loadedCount === frames.length) {
+                    // All loaded
+                    gsap.to(loader, { opacity: 0, duration: 0.5, onComplete: () => loader.remove() });
+                    initScrollAnimation();
+                    renderFrame(0);
+                }
+            };
+            images.push(img);
+        });
+
+        // Ensure images array is sorted same as source if async load messes up order? 
+        // No, push order is synchronous in loop logic, but load is async. 
+        // We need to make sure we access them by INDEX corresponding to frames array.
+        // Better logic: Assign to index directly.
+        
+        const orderedImages = new Array(frames.length);
+        frames.forEach((src, i) => {
+             const img = new Image();
+             img.src = src;
+             img.onload = () => {
+                 loadedCount++;
+                 // Update loader UI
+                 const progress = Math.round((loadedCount / frames.length) * 100);
+                 if(loaderBar) loaderBar.style.width = `${progress}%`;
+                 if(loaderText) loaderText.innerText = `LOADING DATA... ${progress}%`;
+
+                 if (loadedCount === frames.length) {
+                    gsap.to(loader, { opacity: 0, duration: 0.5, onComplete: () => loader.style.display = 'none' });
+                    initScrollAnimation();
+                    renderFrame(0);
+                 }
+             };
+             orderedImages[i] = img; 
+        });
+
+
+        // Render Logic
+        function renderFrame(index) {
+            const img = orderedImages[index];
+            if (!img) return;
+            
+            // High DPI
+            const dpr = window.devicePixelRatio || 1;
+            const rect = canvas.getBoundingClientRect();
+            
+            canvas.width = rect.width * dpr;
+            canvas.height = rect.height * dpr;
+            context.scale(dpr, dpr);
+            
+            // Cover Logic
+            context.fillStyle = '#050505';
+            context.fillRect(0, 0, rect.width, rect.height);
+            
+            const imgRatio = img.width / img.height;
+            const canvasRatio = rect.width / rect.height;
+            
+            let drawWidth, drawHeight, offsetX, offsetY;
+            
+            if (canvasRatio > imgRatio) {
+                drawWidth = rect.width;
+                drawHeight = img.height * (rect.width / img.width);
+                offsetX = 0;
+                offsetY = (rect.height - drawHeight) / 2;
+            } else {
+                drawHeight = rect.height;
+                drawWidth = img.width * (rect.height / img.height);
+                offsetX = (rect.width - drawWidth) / 2;
+                offsetY = 0;
+            }
+            
+            context.drawImage(img, offsetX, offsetY, drawWidth, drawHeight);
+        }
+
+        function initScrollAnimation() {
+            // Pin the hero section for 400vh
+            ScrollTrigger.create({
+                trigger: "#porsche-scroll-container",
+                start: "top top",
+                end: "bottom bottom",
+                pin: false, // Wait, logic in React was: container 400vh, canvas sticky.
+                // In GSAP, we typically pin the canvas container while scrubbing.
+                // React code: <div h-[400vh]> <div sticky top-0 h-screen> ... </div> </div>
+                // The sticky behavior is CSS based. So no GSAP pinning needed!
+                scrub: 1, // Add scrub smoothing
+                onUpdate: (self) => {
+                    const progress = self.progress;
+                    const frameIndex = Math.min(
+                        models.length - 1,
+                        Math.floor(progress * (orderedImages.length - 1))
+                    );
+                    // Sequencing object tween? Or just direct calculation?
+                    // Direct calculation is simpler for React-to-GSAP simple port.
+                    // But for GSAP smoothness:
+                }
+            });
+
+            // Re-implementing correctly using GSAP Tween linked to scroll
+            gsap.to(sequencing, {
+                frame: orderedImages.length - 1,
+                snap: "frame",
+                ease: "none",
+                scrollTrigger: {
+                    trigger: "#porsche-scroll-container",
+                    start: "top top",
+                    end: "bottom bottom",
+                    scrub: 0 // React used simple scrollYProgress, scrub 0 is instant response
+                },
+                onUpdate: () => {
+                    renderFrame(sequencing.frame);
+                }
+            });
+
+            // Text Animations using ScrollTrigger
+            // Stage 1: 0 - 0.2
+            gsap.to("#stage-1", {
+                opacity: 1, y: 0,
+                scrollTrigger: {
+                    trigger: "#porsche-scroll-container",
+                    start: "top top",
+                    end: "15% top", 
+                    scrub: true
+                }
+            });
+            gsap.to("#stage-1", {
+                opacity: 0, y: -50,
+                scrollTrigger: {
+                    trigger: "#porsche-scroll-container",
+                    start: "15% top",
+                    end: "20% top",
+                    scrub: true
+                }
+            });
+
+            // Stage 2: 0.2 - 0.5
+            gsap.to("#stage-2", {
+                opacity: 1, y: 0,
+                scrollTrigger: { trigger: "#porsche-scroll-container", start: "20% top", end: "25% top", scrub: true }
+            });
+            gsap.to("#stage-2", {
+                opacity: 0, y: -50,
+                scrollTrigger: { trigger: "#porsche-scroll-container", start: "45% top", end: "50% top", scrub: true }
+            });
+
+            // Stage 3: 0.5 - 0.8
+            gsap.to("#stage-3", {
+                opacity: 1, y: 0,
+                scrollTrigger: { trigger: "#porsche-scroll-container", start: "50% top", end: "55% top", scrub: true }
+            });
+            gsap.to("#stage-3", {
+                opacity: 0, y: -50,
+                scrollTrigger: { trigger: "#porsche-scroll-container", start: "75% top", end: "80% top", scrub: true }
+            });
+
+            // Stage 4: 0.8 - 1.0
+            gsap.to("#stage-4", {
+                opacity: 1, y: 0,
+                scrollTrigger: { trigger: "#porsche-scroll-container", start: "80% top", end: "85% top", scrub: true }
+            });
+        }
+
+        // --- FEATURES ANIMATIONS ---
+        gsap.to(".feature-header", {
+            opacity: 1, x: 0, duration: 0.8,
+            scrollTrigger: { trigger: "#features", start: "top 80%" }
+        });
+
+        gsap.to(".feature-card", {
+            opacity: 1, y: 0, stagger: 0.1, duration: 0.6,
+            scrollTrigger: { trigger: ".feature-card", start: "top 85%" }
+        });
+        
+         gsap.to(".modes-header", {
+            opacity: 1, x: 0, duration: 0.8,
+            scrollTrigger: { trigger: ".modes-header", start: "top 80%" }
+        });
+
+        gsap.to(".mode-card", {
+            opacity: 1, y: 0, stagger: 0.2, duration: 0.6,
+            scrollTrigger: { trigger: ".mode-card", start: "top 85%" }
+        });
+
+        // --- SPECS ANIMATIONS ---
+        ScrollTrigger.create({
+            trigger: ".specs-element",
+            start: "top 80%",
+            onEnter: () => gsap.to(".specs-element", { opacity: 1, x: 0, duration: 0.8 })
+        });
+        
+        gsap.to(".specs-row", {
+            opacity: 1, x: 0, stagger: 0.05, duration: 0.5,
+            scrollTrigger: { trigger: "#specs-table-body", start: "top 85%" }
+        });
+
+        // --- FOOTER ---
+        ScrollTrigger.create({
+            trigger: "#main-footer",
+            start: "top 90%",
+            onEnter: () => gsap.to("#main-footer", { opacity: 1 })
+        });
+
+        // Resize
+        window.addEventListener('resize', () => {
+             renderFrame(sequencing.frame);
+        });
+    </script>
+</body>
+</html>
